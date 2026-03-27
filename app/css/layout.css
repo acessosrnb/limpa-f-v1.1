@@ -1,0 +1,176 @@
+/* ═══════════════════════════════════════════
+   layout.css
+   Estrutura, grid, espaçamento, responsividade.
+   Não contém cores nem tipografia — veja brand-tokens.css.
+   ═══════════════════════════════════════════ */
+
+/* ── Reset ── */
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: var(--sans);
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── Header ── */
+.board-header {
+  background: var(--bg-panel);
+  border-bottom: 2px solid var(--brand-dark);
+  padding: 28px 32px 24px;
+  position: relative;
+  overflow: hidden;
+}
+.board-header::after {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--brand-dark), var(--brand-cyan), var(--brand-green));
+}
+.header-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+.header-meta {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+/* ── KPI Strip ── */
+.kpi-strip {
+  display: flex;
+  gap: 1px;
+  background: var(--border);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  overflow: hidden;
+  max-width: 1400px;
+  margin: 20px auto 0;
+}
+.kpi {
+  flex: 1;
+  background: var(--bg-panel);
+  padding: 14px 18px;
+  text-align: center;
+  min-width: 120px;
+}
+
+/* ── Navigation ── */
+.board-nav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(0, 0, 0, 0.94);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+.nav-inner {
+  display: flex;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+/* ── Board ── */
+.board {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+.board-section {
+  padding: 40px 0;
+  border-bottom: 1px solid var(--border);
+}
+.section-bar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+/* ── Swimlane Board ── */
+.swimlane-board {
+  display: grid;
+  grid-template-columns: 130px 1fr;
+  gap: 0;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  overflow: hidden;
+  margin: 16px 0;
+}
+.swim-label {
+  background: var(--bg-swimlane);
+  border-right: 2px solid var(--brand-dark);
+  border-bottom: 1px solid var(--border);
+  padding: 16px 12px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+}
+.swim-content {
+  background: var(--bg-panel);
+  border-bottom: 1px solid var(--border);
+  padding: 16px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: flex-start;
+}
+
+/* ── Grids ── */
+.risk-grid,
+.improve-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 12px;
+  margin: 16px 0;
+}
+.improve-grid {
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+}
+
+/* ── Footer ── */
+.board-footer {
+  padding: 32px 24px;
+  text-align: center;
+  border-top: 1px solid var(--border);
+}
+
+/* ── Validation Status ── */
+.validation-status {
+  text-align: center;
+  margin-top: 24px;
+}
+
+/* ── Responsive ── */
+@media (max-width: 768px) {
+  .board-header { padding: 20px 16px; }
+  .header-top { flex-direction: column; align-items: flex-start; }
+  .kpi-strip { flex-wrap: wrap; }
+  .kpi { min-width: 100px; }
+  .board { padding: 0 12px; }
+  .swimlane-board { grid-template-columns: 1fr; }
+  .swim-label {
+    border-right: none;
+    border-bottom: 2px solid var(--brand-dark);
+    padding: 10px;
+  }
+  .swim-content { padding: 12px; }
+  .risk-grid,
+  .improve-grid { grid-template-columns: 1fr; }
+}
+
+@media print {
+  .board-nav { position: static; }
+  .detail-body { max-height: none !important; }
+}

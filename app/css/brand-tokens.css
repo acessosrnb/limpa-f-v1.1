@@ -1,0 +1,42 @@
+/* ═══════════════════════════════════════════
+   brand-tokens.css
+   Sanama — GS Inima · Design Tokens
+   Camada de marca isolada do layout.
+   ═══════════════════════════════════════════ */
+
+:root {
+  /* ── Brand Palette ── */
+  --brand-dark:   #005C83;
+  --brand-cyan:   #31B0C8;
+  --brand-green:  #628A1A;
+  --brand-green2: #648C3D;
+  --brand-gray:   #979899;
+
+  /* ── Surfaces ── */
+  --bg:            #000000;
+  --bg-panel:      #0A1118;
+  --bg-card:       #0D1920;
+  --bg-card-hover: #112530;
+  --bg-swimlane:   #070E14;
+  --border:        #142833;
+  --border-active: #1E3D4F;
+
+  /* ── Text ── */
+  --text:      #D0DCE4;
+  --text-muted:#7A9AAE;
+  --text-dim:  #4A6A7E;
+
+  /* ── Semantic States ── */
+  --danger:     #D94F4F;
+  --danger-bg:  rgba(217,79,79,0.08);
+  --warning:    #D4A017;
+  --warning-bg: rgba(212,160,23,0.08);
+  --auto-color: var(--brand-green);
+  --auto-bg:    rgba(98,138,26,0.1);
+  --decision-color: var(--brand-cyan);
+  --decision-bg:    rgba(49,176,200,0.08);
+
+  /* ── Typography ── */
+  --sans: 'IBM Plex Sans', system-ui, sans-serif;
+  --mono: 'IBM Plex Mono', monospace;
+}

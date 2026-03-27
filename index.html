@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Workflow Board — Processo Limpa Fossa | Sanama — GS Inima</title>
+<meta name="description" content="Painel operacional do processo Limpa Fossa — workflow completo da entrada de caminhões ao faturamento. Sanama — GS Inima.">
+<meta name="robots" content="index, follow">
+<meta name="author" content="Sanama — GS Inima">
+
+<!-- Open Graph -->
+<meta property="og:title" content="Workflow Board — Processo Limpa Fossa">
+<meta property="og:description" content="Painel operacional do processo Limpa Fossa — workflow completo da entrada de caminhões ao faturamento.">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="pt_BR">
+
+<!-- Favicon -->
+<link rel="icon" type="image/svg+xml" href="brand/favicon.svg">
+
+<!-- Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<!-- Styles: tokens → layout → components -->
+<link rel="stylesheet" href="app/css/brand-tokens.css">
+<link rel="stylesheet" href="app/css/layout.css">
+<link rel="stylesheet" href="app/css/components.css">
+</head>
+<body>
+
+<!-- ═══ BOARD HEADER ═══ -->
+<header class="board-header">
+  <div class="header-top">
+    <div>
+      <div class="header-id">WF-PROC-001 · Sanama — GS Inima</div>
+      <h1 class="header-title">Processo <span>Limpa Fossa</span> — Workflow Operacional</h1>
+    </div>
+    <div class="header-meta">
+      <div class="meta-chip"><span class="dot dot-info"></span> Gatilho: Chegada do caminhão</div>
+      <div class="meta-chip"><span class="dot dot-auto"></span> 6 automações ativas</div>
+      <div class="meta-chip"><span class="dot dot-risk"></span> 4 riscos mapeados</div>
+      <div class="meta-chip"><span class="dot dot-manual"></span> 4 gargalos manuais</div>
+    </div>
+  </div>
+  <div class="kpi-strip">
+    <div class="kpi"><div class="kpi-val">8</div><div class="kpi-label">Fases do fluxo</div></div>
+    <div class="kpi"><div class="kpi-val">7</div><div class="kpi-label">Atores</div></div>
+    <div class="kpi"><div class="kpi-val">4</div><div class="kpi-label">Pontos de decisão</div></div>
+    <div class="kpi"><div class="kpi-val">4</div><div class="kpi-label">Handoffs</div></div>
+    <div class="kpi"><div class="kpi-val">~45%</div><div class="kpi-label">Automação</div></div>
+    <div class="kpi"><div class="kpi-val">6</div><div class="kpi-label">Melhorias priorizadas</div></div>
+  </div>
+</header>
+
+<!-- ═══ NAV ═══ -->
+<nav class="board-nav" id="board-nav">
+  <div class="nav-inner">
+    <a href="#fluxo">▸ Fluxo principal</a>
+    <a href="#cadastro-flow">▸ Cadastro</a>
+    <a href="#automacoes">▸ Automações</a>
+    <a href="#riscos">▸ Riscos</a>
+    <a href="#melhorias">▸ Melhorias TO-BE</a>
+    <a href="#validacao">▸ Validação</a>
+  </div>
+</nav>
+
+<!-- ═══ MAIN BOARD ═══ -->
+<div class="board">
+
+<!-- ═══ FLUXO PRINCIPAL ═══ -->
+<section class="board-section" id="fluxo">
+  <div class="section-bar">
+    <div class="section-icon flow">▶</div>
+    <div>
+      <div class="section-tag">Seção 01</div>
+      <div class="section-name">Fluxo Principal — Entrada → Controle Financeiro</div>
+    </div>
+  </div>
+
+  <!-- SWIMLANE BOARD -->
+  <div class="swimlane-board">
+
+    <!-- PORTARIA -->
+    <div class="swim-label"><div class="swim-label-text">Portaria</div></div>
+    <div class="swim-content">
+      <div class="node node-start">
+        <div class="node-id">START</div>
+        <div class="node-name">Caminhão chega na portaria</div>
+        <div class="node-desc">Gatilho do processo</div>
+      </div>
+      <div class="arrow-r">→</div>
+      <div class="node node-process">
+        <div class="node-id">P-01</div>
+        <div class="node-name">Coleta de dados pelo porteiro</div>
+        <div class="node-desc">ID sequencial, placa, motorista</div>
+        <div class="node-badges"><span class="badge b-manual">MANUAL</span></div>
+      </div>
+      <div class="arrow-r">→</div>
+      <div class="node node-document">
+        <div class="node-id">P-02</div>
+        <div class="node-name">Formulário de entrada (Forms)</div>
+        <div class="node-desc">Fornecedor + placa + motorista + obs (ID provisório)</div>
+        <div class="node-badges"><span class="badge b-manual">MANUAL</span><span class="badge b-risk">⚠ Risco placa</span></div>
+      </div>
+    </div>
+
+    <!-- AUTOMAÇÃO -->
+    <div class="swim-label"><div class="swim-label-text">Automação<br>24/7</div></div>
+    <div class="swim-content">
+      <div class="node node-auto">
+        <div class="node-id">A-01</div>
+        <div class="node-name">Captura resposta do Forms</div>
+        <div class="node-desc">ID resposta, hora, código, cor MTR, tipologia</div>
+        <div class="node-badges"><span class="badge b-auto">AUTOMATIZADO</span><span class="badge b-handoff">HANDOFF</span></div>
+      </div>
+      <div class="arrow-r">→</div>
+      <div class="node node-auto">
+        <div class="node-id">A-02</div>
+        <div class="node-name">Adiciona linha na base Excel</div>
+        <div class="node-desc">Base compartilhada com equipe de recebimento. Funciona sem planilha aberta.</div>
+        <div class="node-badges"><span class="badge b-auto">AUTOMATIZADO</span><span class="badge b-risk">⚠ Offset -0,125</span></div>
+      </div>
+    </div>
+
+    <!-- RECEBIMENTO -->
+    <div class="swim-label"><div class="swim-label-text">Equipe de<br>Recebimento</div></div>
+    <div class="swim-content">
+      <div class="node node-process">
+        <div class="node-id">R-01</div>
+        <div class="node-name">Visualiza entrada automática</div>
+        <div class="node-desc">Dados caem automaticamente na base</div>
+        <div class="node-badges"><span class="badge b-handoff">HANDOFF</span></div>
+      </div>
+      <div class="arrow-r">→</div>
+      <div class="node node-process">
+        <div class="node-id">R-02</div>
+        <div class="node-name">Associa ID checklist real</div>
+        <div class="node-desc">Substitui ID provisório pelo ID gerado</div>
+        <div class="node-badges"><span class="badge b-manual">MANUAL</span></div>
+      </div>
+      <div class="arrow-r">→</div>
+      <div class="node node-process">
+        <div class="node-id">R-03</div>
+        <div class="node-name">Confere placa e motorista</div>
+        <div class="node-desc">Validação visual dos dados de entrada</div>
+        <div class="node-badges"><span class="badge b-manual">MANUAL</span></div>
+      </div>
+      <div class="arrow-r">→</div>
+      <div class="node node-document">
+        <div class="node-id">R-04</div>
+        <div class="node-name">Formulário de recebimento</div>
+        <div class="node-desc">Código do caminhão, qtd MTRs, tipologia</div>
+        <div class="node-badges"><span class="badge b-manual">MANUAL</span></div>
+      </div>
+      <div class="arrow-r">→</div>
+      <div class="node node-auto">
+        <div class="node-id">A-03</div>
+        <div class="node-name">Automação → tabela de medição</div>
+        <div class="node-desc">PROCV com conversão texto→número para cruzamento</div>
+        <div class="node-badges"><span class="badge b-auto">AUTOMATIZADO</span></div>
+      </div>
+    </div>
+
+    <!-- OPERAÇÃO -->
+    <div class="swim-label"><div class="swim-label-text">Operação<br>de Campo</div></div>
+    <div class="swim-content">
+      <div class="node node-process">
+        <div class="node-id">O-01</div>
+        <div class="node-name">Inspeção de EPIs</div>
+        <div class="node-desc">Luva, bota, fardamento, capacete</div>
+        <div class="node-badges"><span class="badge b-manual">MANUAL</span></div>
+      </div>
+      <div class="arrow-r">→</div>
+      <div class="node node-decision">
+        <div class="node-id">D-01</div>
+        <div class="node-name">Caminhão tem vazamento?</div>
+        <div class="node-desc">SIM → Anotar ocorrência · NÃO → Seguir</div>
+        <div class="node-badges"><span class="badge b-decision">DECISÃO</span></div>
+      </div>
+      <div class="arrow-r">→</div>
+      <div class="node node-process">
+        <div class="node-id">O-02</div>
+        <div class="node-name">Teste de fumaça preta</div>
+        <div class="node-desc">Escala de densidade via cartão colorimétrico</div>
+        <div class="node-badges"><span class="badge b-manual">MANUAL</span></div>
+      </div>
+    </div>
+
+    <!-- ADMINISTRATIVO + MTR -->
+    <div class="swim-label"><div class="swim-label-text">Administrativo<br>+ MTR</div></div>
+    <div class="swim-content">
+      <div class="node node-process">
+        <div class="node-id">M-01</div>
+        <div class="node-name">Conferência do MTR</div>
+        <div class="node-desc">Volume MTR vs volume caminhão</div>
+        <div class="node-badges"><span class="badge b-manual">MANUAL</span></div>
+      </div>
+      <div class="arrow-r">→</div>
+      <div class="node node-decision">
+        <div class="node-id">D-02</div>
+        <div class="node-name">Volume MTR = Volume caminhão?</div>
+        <div class="node-desc">SIM → Prosseguir · NÃO → Investigar</div>
+        <div class="node-badges"><span class="badge b-decision">DECISÃO</span></div>
+      </div>
+      <div class="arrow-r">→</div>
+      <div class="node node-process">
+        <div class="node-id">M-02</div>
+        <div class="node-name">Baixa no site IMA</div>
+        <div class="node-desc">Busca por destinador → localiza MTR → recebe</div>
+        <div class="node-badges"><span class="badge b-manual">MANUAL</span><span class="badge b-bottleneck">DEMORADO</span></div>
+      </div>
+      <div class="arrow-r">→</div>
+      <div class="node node-auto">
+        <div class="node-id">A-04</div>
+        <div class="node-name">Checklist autofill via PROCV</div>
+        <div class="node-desc">Insere ID → puxa todos os dados automaticamente</div>
+        <div class="node-badges"><span class="badge b-auto">AUTOMATIZADO</span></div>
+      </div>
+      <div class="arrow-r">→</div>
+      <div class="node node-document">
+        <div class="node-id">M-03</div>
+        <div class="node-name">Impressão + Assinatura</div>
+        <div class="node-desc">2 vias: empresa + condutor</div>
+        <div class="node-badges"><span class="badge b-manual">MANUAL</span></div>
+      </div>
+    </div>
+
+    <!-- FATURAMENTO -->
+    <div class="swim-label"><div class="swim-label-text">Faturamento</div></div>
+    <div class="swim-content">
+      <div class="node node-auto">
+        <div class="node-id">A-05</div>
+        <div class="node-name">Check entrada × medição</div>
+        <div class="node-desc">Formatação condicional: duplicado=vermelho, vazio=amarelo</div>
+        <div class="node-badges"><span class="badge b-auto">FÓRMULAS</span></div>
+      </div>
+      <div class="arrow-r">→</div>
+      <div class="node node-decision">
+        <div class="node-id">D-03</div>
+        <div class="node-name">Entrada foi faturada?</div>
+        <div class="node-desc">SIM → OK · NÃO → Registrar observação</div>
+        <div class="node-badges"><span class="badge b-decision">DECISÃO</span></div>
+      </div>
+      <div class="arrow-r">→</div>
+      <div class="node node-decision">
+        <div class="node-id">D-04</div>
+        <div class="node-name">Faturamento tem entrada?</div>
+        <div class="node-desc">SIM → OK · NÃO → Investigar com equipe</div>
+        <div class="node-badges"><span class="badge b-decision">DECISÃO</span></div>
+      </div>
+      <div class="arrow-r">→</div>
+      <div class="node node-auto">
+        <div class="node-id">A-06</div>
+        <div class="node-name">Cálculo de tarifa</div>
+        <div class="node-desc">SOMASE aninhado + PROCV por período, cliente e serviço</div>
+        <div class="node-badges"><span class="badge b-auto">FÓRMULAS</span></div>
+      </div>
+      <div class="arrow-r">→</div>
+      <div class="node node-document">
+        <div class="node-id">F-01</div>
+        <div class="node-name">Boletim de Medição (BM)</div>
+        <div class="node-desc">Template por fornecedor, cálculos automáticos no template</div>
+        <div class="node-badges"><span class="badge b-manual">ENVIO MANUAL</span><span class="badge b-bottleneck">GARGALO</span></div>
+      </div>
+      <div class="arrow-r">→</div>
+      <div class="node node-process">
+        <div class="node-id">F-02</div>
+        <div class="node-name">Envio de BM por e-mail</div>
+        <div class="node-desc">Modelo padronizado, enviado individualmente por fornecedor</div>
+        <div class="node-badges"><span class="badge b-manual">MANUAL</span><span class="badge b-bottleneck">GARGALO PRINCIPAL</span></div>
+      </div>
+    </div>
+
+    <!-- NOTA FISCAL -->
+    <div class="swim-label"><div class="swim-label-text">Nota Fiscal</div></div>
+    <div class="swim-content">
+      <div class="node node-process">
+        <div class="node-id">NF-01</div>
+        <div class="node-name">Copiar dados cols I–AD</div>
+        <div class="node-desc">Cópia manual do faturamento para lançamento de Lista de Ordem</div>
+        <div class="node-badges"><span class="badge b-manual">MANUAL</span><span class="badge b-bottleneck">GARGALO</span><span class="badge b-handoff">HANDOFF</span></div>
+      </div>
+      <div class="arrow-r">→</div>
+      <div class="node node-document">
+        <div class="node-id">NF-02</div>
+        <div class="node-name">Solicitar Lista de Ordem (Servelo)</div>
+        <div class="node-desc">Catálogo → Faturamento → Lista de Ordem. Contrato, elemento de custo, anexa planilha.</div>
+        <div class="node-badges"><span class="badge b-manual">MANUAL</span></div>
+      </div>
+      <div class="arrow-r">→</div>
+      <div class="node node-process">
+        <div class="node-id">NF-03</div>
+        <div class="node-name">NFs geradas → envio a Alessandro</div>
+        <div class="node-desc">Após emissão pelo fiscal, envia por e-mail para controle financeiro</div>
+        <div class="node-badges"><span class="badge b-manual">MANUAL</span><span class="badge b-handoff">HANDOFF</span></div>
+      </div>
+    </div>
+
+    <!-- CONTROLE FINANCEIRO -->
+    <div class="swim-label"><div class="swim-label-text">Controle<br>Financeiro</div></div>
+    <div class="swim-content">
+      <div class="node node-document">
+        <div class="node-id">CF-01</div>
+        <div class="node-name">Atualizar controle de notas</div>
+        <div class="node-desc">Planilha: tipo movimentação, NF, parcelas, CNPJ, vencimento, status (pago/vencido/bloqueado), juros</div>
+        <div class="node-badges"><span class="badge b-manual">MANUAL</span></div>
+      </div>
+      <div class="arrow-r">→</div>
+      <div class="node node-process">
+        <div class="node-id">F-03</div>
+        <div class="node-name">Emissão de boleto (Itaú)</div>
+        <div class="node-desc">Processo manual — restrição LGPD/banco</div>
+        <div class="node-badges"><span class="badge b-manual">MANUAL</span></div>
+      </div>
+      <div class="arrow-r">→</div>
+      <div class="node node-end">
+        <div class="node-id">END</div>
+        <div class="node-name">Ciclo encerrado</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Expandable: Detalhes técnicos -->
+  <button class="detail-toggle" onclick="toggleDetail(this)">
+    <span>📐 Detalhe técnico: Lógica de PROCV com conversão de tipo e ajuste de horário</span>
+    <span class="chevron">▼</span>
+  </button>
+  <div class="detail-body">
+    <div class="detail-inner">
+      <strong>Conversão de tipo:</strong> O ID da resposta do Forms é texto; o ID na base de medição é número. O PROCV usa VALOR() para converter texto → número inteiro antes da procura.<br><br>
+      <strong>Ajuste de horário:</strong> A automação registra hora com offset de +3h em relação ao real. Subtração de 0,125 (fração de dia = 3h) corrige o problema. Método: comparação manual entre hora de chegada física e hora registrada, até convergir.<br><br>
+      <strong>Fórmulas de faturamento:</strong> SOMASE aninhado procura por cliente + período + serviço e retorna volume em m³. PROCV de apoio retorna valor unitário. Descontos aplicados diretamente no unitário antes da multiplicação.
+    </div>
+  </div>
+
+  <!-- Expandable: Exceções -->
+  <button class="detail-toggle" onclick="toggleDetail(this)">
+    <span>🔀 Caminhos de exceção e contingência</span>
+    <span class="chevron">▼</span>
+  </button>
+  <div class="detail-body">
+    <div class="detail-inner">
+      <strong>Domingo / Sem acesso ao Forms:</strong> Porteiro não gera ID digital. Equipe de operação preenche via impressa manualmente. Impacto: perda de rastreabilidade digital, inserção manual posterior.<br><br>
+      <strong>Entrada sem faturamento:</strong> Quando caminhão não descarta (flat de gordura, porta lançada 2x). Requer observação justificando. Check administrativo identifica esses casos.<br><br>
+      <strong>Faturamento sem entrada:</strong> Anomalia que exige investigação com equipe de recebimento.
+    </div>
+  </div>
+
+  <!-- Expandable: Nota Fiscal + Controle Financeiro -->
+  <button class="detail-toggle" onclick="toggleDetail(this)">
+    <span>📑 Nota Fiscal, Lista de Ordem e Controle Financeiro</span>
+    <span class="chevron">▼</span>
+  </button>
+  <div class="detail-body">
+    <div class="detail-inner">
+      <strong>Lista de Ordem:</strong> Após clientes confirmarem (ou após 2 dias sem retorno), copia-se manualmente as colunas I a AD da planilha de faturamento. Solicitação via Servelo: Catálogo → Faturamento → Lista de Ordem. Campos fixos: contrato, elemento de custo. Anexa planilha e informa referência (ex: "Lista de Ordem nº 142").<br><br>
+      <strong>Controle Financeiro:</strong> Planilha gerida por Alessandro. Campos: tipo de movimentação (entrada, parcelamento, adiantamento), número NF, parcela atual / total, CNPJ, data de lançamento, valor emitido, vencimento, dias bloqueados, data de bloqueio, tratativa, data de pagamento, valor recebido, juros, receita/despesas. Fórmula de status: se vencido, calcula diferença entre data de bloqueio e vencimento. Campos de receita/despesas raramente preenchidos na prática.
+    </div>
+  </div>
+
+  <!-- Expandable: MTR OCR proposta -->
+  <button class="detail-toggle" onclick="toggleDetail(this)">
+    <span>🤖 Proposta de automação: OCR para leitura de MTR (IMP-6)</span>
+    <span class="chevron">▼</span>
+  </button>
+  <div class="detail-body">
+    <div class="detail-inner">
+      <strong>Conceito:</strong> Digitalizar todos os MTRs do dia no final do expediente. Automação (Power Automate + OCR/IA) lê os documentos e extrai: número MTR, razão social do gerador, CNPJ, transportador, placa, motorista, código IBAMA, volume (litros/m³/ton).<br><br>
+      <strong>Desafios identificados:</strong> Os MTRs são PDFs de imagem (não copiáveis). A qualidade da cópia varia e causa dificuldade para OCR reconhecer números. O campo de assinatura do motorista é manuscrito, não digitado — difícil de extrair automaticamente.<br><br>
+      <strong>Via alternativa (QR Code):</strong> Cada MTR possui QR Code que redireciona ao site do IMA com o número do MTR já preenchido na tela de consulta. Possível via de extração de dados via scraping ou API do IMA — mas até o momento não há API disponível.
+    </div>
+  </div>
+</section>
+
+<!-- ═══ FLUXO CADASTRO ═══ -->
+<section class="board-section" id="cadastro-flow">
+  <div class="section-bar">
+    <div class="section-icon flow">▶</div>
+    <div>
+      <div class="section-tag">Seção 02</div>
+      <div class="section-name">Fluxo Auxiliar — Cadastro de Novo Cliente</div>
+    </div>
+  </div>
+
+  <div class="swimlane-board">
+    <div class="swim-label"><div class="swim-label-text">Administrativo</div></div>
+    <div class="swim-content">
+      <div class="node node-start">
+        <div class="node-id">C-START</div>
+        <div class="node-name">Recebe documentos por e-mail</div>
+        <div class="node-desc">CNPJ, insc. estadual, contrato social, ATRP, dados pessoais</div>
+      </div>
+      <div class="arrow-r">→</div>
+      <div class="node node-process">
+        <div class="node-id">C-01</div>
+        <div class="node-name">Confirma dados com fornecedor</div>
+        <div class="node-desc">Valida testemunha se já existente em base</div>
+        <div class="node-badges"><span class="badge b-manual">MANUAL</span></div>
+      </div>
+      <div class="arrow-r">→</div>
+      <div class="node node-document">
+        <div class="node-id">C-02</div>
+        <div class="node-name">Abre chamado no Servelo</div>
+        <div class="node-desc">Catálogo → Faturamento → Novo cadastro de cliente</div>
+        <div class="node-badges"><span class="badge b-manual">MANUAL</span></div>
+      </div>
+      <div class="arrow-r">→</div>
+      <div class="node node-process">
+        <div class="node-id">C-03</div>
+        <div class="node-name">Aguarda código SAP</div>
+        <div class="node-desc">Registra na base "Limpa Fossa Total"</div>
+        <div class="node-badges"><span class="badge b-manual">ESPERA</span></div>
+      </div>
+    </div>
+
+    <div class="swim-label"><div class="swim-label-text">Jurídico</div></div>
+    <div class="swim-content">
+      <div class="node node-document">
+        <div class="node-id">C-04</div>
+        <div class="node-name">Solicita contrato</div>
+        <div class="node-desc">Novo contrato (novo) ou Aditivo (existente)</div>
+        <div class="node-badges"><span class="badge b-manual">MANUAL</span></div>
+      </div>
+      <div class="arrow-r">→</div>
+      <div class="node node-process">
+        <div class="node-id">C-05</div>
+        <div class="node-name">Elabora minuta GS</div>
+        <div class="node-desc">Dados cliente + dados Casal + testemunha</div>
+        <div class="node-badges"><span class="badge b-manual">MANUAL</span></div>
+      </div>
+      <div class="arrow-r">→</div>
+      <div class="node node-process">
+        <div class="node-id">C-06</div>
+        <div class="node-name">Cria pasta Gestão Transportadoras</div>
+        <div class="node-desc">Estrutura padrão + subpasta Medição 01</div>
+        <div class="node-badges"><span class="badge b-manual">MANUAL</span></div>
+      </div>
+      <div class="arrow-r">→</div>
+      <div class="node node-end">
+        <div class="node-id">C-END</div>
+        <div class="node-name">Cliente cadastrado</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ AUTOMAÇÕES ═══ -->
+<section class="board-section" id="automacoes">
+  <div class="section-bar">
+    <div class="section-icon auto">⚡</div>
+    <div>
+      <div class="section-tag">Seção 03</div>
+      <div class="section-name">Mapa de Automações</div>
+    </div>
+  </div>
+
+  <table class="auto-table">
+    <thead>
+      <tr><th>ID</th><th>Componente</th><th>Tipo</th><th>Status</th><th>Nota</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>A-01</td><td class="td-name">Forms entrada → Base Excel</td><td>Automação 24/7</td><td><span class="badge b-auto">● ATIVO</span></td><td>Sem necessidade de planilha aberta</td></tr>
+      <tr><td>A-02</td><td class="td-name">Ajuste de horário -0,125</td><td>Fórmula Excel</td><td><span class="badge b-warning">● WORKAROUND</span></td><td>Empírico, sem causa raiz</td></tr>
+      <tr><td>A-03</td><td class="td-name">Forms recebimento → Tabela medição</td><td>Automação 24/7</td><td><span class="badge b-auto">● ATIVO</span></td><td>PROCV com VALOR() para conversão</td></tr>
+      <tr><td>A-04</td><td class="td-name">Checklist autofill (PROCV)</td><td>Fórmula Excel</td><td><span class="badge b-auto">● ATIVO</span></td><td>Basta inserir ID, puxa tudo</td></tr>
+      <tr><td>A-05</td><td class="td-name">Check entrada × medição</td><td>Fórmula + Format. cond.</td><td><span class="badge b-auto">● ATIVO</span></td><td>Duplicado=vermelho, vazio=amarelo</td></tr>
+      <tr><td>A-06</td><td class="td-name">Cálculo de tarifa (SOMASE)</td><td>Fórmula Excel</td><td><span class="badge b-auto">● ATIVO</span></td><td>Aninhado por cliente/período/serviço</td></tr>
+      <tr><td>A-07</td><td class="td-name">Template BM com cálculos</td><td>Fórmula Excel</td><td><span class="badge b-auto">● ATIVO</span></td><td>BRR, soma, volume × unitário</td></tr>
+      <tr><td>—</td><td class="td-name">Geração automática de ID</td><td>—</td><td><span class="badge b-risk">✗ INEXISTENTE</span></td><td>Sequencial manual pelo porteiro</td></tr>
+      <tr><td>—</td><td class="td-name">Filtro de placas por fornecedor</td><td>—</td><td><span class="badge b-risk">✗ INEXISTENTE</span></td><td>Risco de associação incorreta</td></tr>
+      <tr><td>—</td><td class="td-name">Envio automático de BM</td><td>—</td><td><span class="badge b-risk">✗ INEXISTENTE</span></td><td>Gargalo principal do faturamento</td></tr>
+      <tr><td>—</td><td class="td-name">Cópia automática cols I–AD → Lista de Ordem</td><td>—</td><td><span class="badge b-risk">✗ INEXISTENTE</span></td><td>Processo manual repetitivo (NF-01)</td></tr>
+      <tr><td>—</td><td class="td-name">OCR/IA para leitura de MTR</td><td>Power Automate + OCR</td><td><span class="badge b-warning">● PROPOSTA</span></td><td>Em experimentação. Desafios com PDFs de imagem e qualidade. QR Code como alternativa.</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- ═══ RISCOS ═══ -->
+<section class="board-section" id="riscos">
+  <div class="section-bar">
+    <div class="section-icon risk">⚠</div>
+    <div>
+      <div class="section-tag">Seção 04</div>
+      <div class="section-name">Matriz de Riscos</div>
+    </div>
+  </div>
+
+  <div class="risk-grid">
+    <div class="risk-card high">
+      <div class="risk-header">
+        <div class="risk-title">Troca de placas entre fornecedores</div>
+        <span class="risk-level rl-high">ALTO</span>
+      </div>
+      <div class="risk-desc">Formulário permite selecionar qualquer placa para qualquer fornecedor. Com dezenas de placas semelhantes, erro é iminente. Impacto: faturamento incorreto, rastreabilidade comprometida.</div>
+      <div class="risk-step">Etapa: P-02 · Ator: Porteiro</div>
+    </div>
+    <div class="risk-card high">
+      <div class="risk-header">
+        <div class="risk-title">Indisponibilidade do formulário</div>
+        <span class="risk-level rl-high">ALTO</span>
+      </div>
+      <div class="risk-desc">Sem acesso ao Forms (domingo, problema técnico), não se gera ID digital. Operação preenche via impressa. Perda de rastreabilidade e inserção manual posterior.</div>
+      <div class="risk-step">Etapa: P-02 · Ator: Porteiro / Operação</div>
+    </div>
+    <div class="risk-card medium">
+      <div class="risk-header">
+        <div class="risk-title">Offset de horário empírico</div>
+        <span class="risk-level rl-med">MÉDIO</span>
+      </div>
+      <div class="risk-desc">Fração 0,125 encontrada por tentativa e erro. Sem documentação da causa raiz. Mudança na plataforma pode invalidar a correção sem aviso.</div>
+      <div class="risk-step">Etapa: A-02 · Ator: Automação</div>
+    </div>
+    <div class="risk-card medium">
+      <div class="risk-header">
+        <div class="risk-title">Erro no lançamento IMA</div>
+        <span class="risk-level rl-med">MÉDIO</span>
+      </div>
+      <div class="risk-desc">Busca manual por destinador no site é demorada e propensa a erros. Volume diário amplifica o risco.</div>
+      <div class="risk-step">Etapa: M-02 · Ator: Administrativo</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ MELHORIAS ═══ -->
+<section class="board-section" id="melhorias">
+  <div class="section-bar">
+    <div class="section-icon improve">↑</div>
+    <div>
+      <div class="section-tag">Seção 05</div>
+      <div class="section-name">Melhorias Priorizadas (TO-BE)</div>
+    </div>
+  </div>
+
+  <div class="improve-grid">
+    <div class="improve-card">
+      <div class="improve-priority">
+        <span class="badge b-auto">IMPACTO: ALTO</span>
+        <span class="badge b-decision">ESFORÇO: S</span>
+      </div>
+      <div class="improve-title">1. Geração automática de ID no Forms</div>
+      <div class="improve-desc">Elimina sequencial manual. ID aparece imediatamente para o porteiro. Remove dependência do recebimento para associar ID real. Resolve risco de domingos.</div>
+      <div class="improve-target">Resolve: P-01, P-02</div>
+    </div>
+    <div class="improve-card">
+      <div class="improve-priority">
+        <span class="badge b-auto">IMPACTO: ALTO</span>
+        <span class="badge b-decision">ESFORÇO: S</span>
+      </div>
+      <div class="improve-title">2. Filtro condicional de placas por fornecedor</div>
+      <div class="improve-desc">Ao selecionar fornecedor, exibir apenas suas placas vinculadas. Elimina risco de associação incorreta. Base de placas já existe.</div>
+      <div class="improve-target">Resolve: P-02</div>
+    </div>
+    <div class="improve-card">
+      <div class="improve-priority">
+        <span class="badge b-auto">IMPACTO: ALTO</span>
+        <span class="badge b-warning">ESFORÇO: M</span>
+      </div>
+      <div class="improve-title">3. Automação de envio de BM por e-mail</div>
+      <div class="improve-desc">Gerar e disparar BM automaticamente para cada fornecedor no fechamento do período. Principal gargalo manual citado na transcrição.</div>
+      <div class="improve-target">Resolve: F-01, F-02</div>
+    </div>
+    <div class="improve-card">
+      <div class="improve-priority">
+        <span class="badge b-warning">IMPACTO: MÉDIO</span>
+        <span class="badge b-decision">ESFORÇO: XS</span>
+      </div>
+      <div class="improve-title">4. Correção de timezone na automação</div>
+      <div class="improve-desc">Investigar causa raiz do offset de 3h. Configurar timezone correto na plataforma em vez de subtração empírica.</div>
+      <div class="improve-target">Resolve: A-02</div>
+    </div>
+    <div class="improve-card">
+      <div class="improve-priority">
+        <span class="badge b-auto">IMPACTO: ALTO</span>
+        <span class="badge b-decision">ESFORÇO: S</span>
+      </div>
+      <div class="improve-title">5. Automação da cópia de dados para Lista de Ordem</div>
+      <div class="improve-desc">Automatizar extração das colunas I–AD do faturamento para lançamento de Lista de Ordem no Servelo. Processo atualmente manual e repetitivo.</div>
+      <div class="improve-target">Resolve: NF-01</div>
+    </div>
+    <div class="improve-card">
+      <div class="improve-priority">
+        <span class="badge b-auto">IMPACTO: ALTO</span>
+        <span class="badge b-risk">ESFORÇO: L</span>
+      </div>
+      <div class="improve-title">6. OCR + extração de dados do MTR</div>
+      <div class="improve-desc">Digitalizar MTRs e usar OCR/IA para extrair dados (número, CNPJ, placa, volume). QR Code no MTR leva ao IMA com número preenchido — possível via alternativa. Desafios: PDFs de imagem, qualidade variável.</div>
+      <div class="improve-target">Resolve: M-02</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ VALIDAÇÃO ═══ -->
+<section class="board-section" id="validacao">
+  <div class="section-bar">
+    <div class="section-icon flow">✓</div>
+    <div>
+      <div class="section-tag">Seção 06</div>
+      <div class="section-name">Validação do Workflow</div>
+    </div>
+  </div>
+
+  <table class="auto-table">
+    <thead><tr><th>Check</th><th>Status</th><th>Observação</th></tr></thead>
+    <tbody>
+      <tr><td class="td-name">Fidelidade à transcrição</td><td><span class="badge b-auto">✓ OK</span></td><td>Etapas, decisões e detalhes técnicos extraídos de 2 transcrições</td></tr>
+      <tr><td class="td-name">Sequência operacional</td><td><span class="badge b-auto">✓ OK</span></td><td>Fluxo ponta a ponta: Portaria → Faturamento → NF → Controle Financeiro → Boleto</td></tr>
+      <tr><td class="td-name">Decisões posicionadas</td><td><span class="badge b-auto">✓ OK</span></td><td>4 pontos de decisão explícitos (D-01 a D-04)</td></tr>
+      <tr><td class="td-name">Handoffs entre áreas</td><td><span class="badge b-auto">✓ OK</span></td><td>4 handoffs: Portaria→Auto, Auto→Receb., Fatur.→NF, NF→Financeiro</td></tr>
+      <tr><td class="td-name">Cobertura NF + Financeiro</td><td><span class="badge b-auto">✓ OK</span></td><td>Lista de Ordem, envio NF, controle de notas com status de pagamento</td></tr>
+      <tr><td class="td-name">Cobertura MTR OCR</td><td><span class="badge b-auto">✓ OK</span></td><td>Registrada como IMP-6 com desafios e alternativa QR Code documentados</td></tr>
+      <tr><td class="td-name">Automação vs Manual</td><td><span class="badge b-auto">✓ OK</span></td><td>Cada nó classificado. 12 automações mapeadas (6 ativas, 1 workaround, 4 inexistentes, 1 proposta)</td></tr>
+      <tr><td class="td-name">Risco de alucinação</td><td><span class="badge b-warning">△ BAIXO</span></td><td>Power Automate confirmado na 2ª transcrição. Offset 0,125 sem causa raiz documentada.</td></tr>
+    </tbody>
+  </table>
+
+  <div class="validation-status">
+    <span class="badge b-auto" style="font-size:12px;padding:8px 20px;border-radius:4px;">APPROVED WITH CAVEATS</span>
+    <p>Ressalva remanescente: causa raiz do offset horário (-0,125) não confirmada.</p>
+  </div>
+</section>
+
+</div><!-- /board -->
+
+<footer class="board-footer">
+  <strong>Sanama — GS Inima</strong> · Workflow Board · Processo Limpa Fossa · WF-PROC-001 · v1.1.0 · 2026
+</footer>
+
+<script src="app/js/board.js"></script>
+</body>
+</html>

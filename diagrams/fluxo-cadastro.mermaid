@@ -1,0 +1,22 @@
+flowchart TD
+    C00(["⬤ INÍCIO — Recebe documentos por e-mail"])
+
+    subgraph ADMINISTRATIVO["📋 ADMINISTRATIVO"]
+        C01["C-01 · Recebe docs por e-mail<br>CNPJ + Insc. Est. + Contrato Social + ATRP"]
+        C02["C-02 · Confirma dados com fornecedor<br>Valida testemunha<br>🟡 MANUAL"]
+        C03["C-03 · Abre chamado Servelo<br>Faturamento → Novo cadastro<br>🟡 MANUAL"]
+        C04["C-04 · Aguarda código SAP<br>Registra na base Limpa Fossa Total<br>🟡 ESPERA"]
+    end
+
+    subgraph JURIDICO["⚖️ JURÍDICO"]
+        C05["C-05 · Solicita contrato<br>Novo contrato ou Aditivo<br>🟡 MANUAL"]
+        C06["C-06 · Elabora minuta GS<br>Dados cliente + Casal + testemunha<br>🟡 MANUAL"]
+    end
+
+    subgraph ESTRUTURA["📂 ORGANIZAÇÃO"]
+        C07["C-07 · Cria pasta Gestão Transportadoras<br>Estrutura padrão + Medição 01<br>🟡 MANUAL"]
+    end
+
+    C99(["⬤ CLIENTE CADASTRADO"])
+
+    C00 --> C01 --> C02 --> C03 --> C04 --> C05 --> C06 --> C07 --> C99

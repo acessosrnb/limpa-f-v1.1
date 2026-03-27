@@ -1,0 +1,110 @@
+flowchart TD
+    START(["⬤ INÍCIO — Caminhão chega na portaria"])
+
+    subgraph PORTARIA["🚧 PORTARIA"]
+        P01["P-01 · Porteiro coleta dados<br>ID sequencial + placa + motorista<br>🟡 MANUAL"]
+        P02["P-02 · Preenche formulário Forms<br>Fornecedor + placa + motorista + obs<br>🟡 MANUAL · ⚠ RISCO PLACA"]
+    end
+
+    subgraph AUTOMACAO_ENTRADA["⚡ AUTOMAÇÃO 24/7 — ENTRADA"]
+        A01["A-01 · Captura resposta do Forms<br>ID + hora + código + cor MTR + tipologia<br>🟢 AUTOMATIZADO"]
+        A02["A-02 · Adiciona linha na base Excel<br>Funciona sem planilha aberta<br>🟢 AUTOMATIZADO · ⚠ Offset -0,125"]
+    end
+
+    subgraph RECEBIMENTO["👥 EQUIPE DE RECEBIMENTO"]
+        R01["R-01 · Visualiza entrada automática<br>↔ HANDOFF"]
+        R02["R-02 · Associa ID checklist real<br>🟡 MANUAL"]
+        R03["R-03 · Confere placa e motorista<br>🟡 MANUAL"]
+        R04["R-04 · Formulário de recebimento<br>Código + qtd MTRs + tipologia<br>🟡 MANUAL"]
+        A03["A-03 · Automação → tabela medição<br>PROCV com VALOR texto→número<br>🟢 AUTOMATIZADO"]
+    end
+
+    subgraph OPERACAO["🔧 OPERAÇÃO DE CAMPO"]
+        O01["O-01 · Inspeção EPIs<br>Luva, bota, fardamento, capacete<br>🟡 MANUAL"]
+        D01{"D-01 · Caminhão tem<br>vazamento?"}
+        O01A["Anotar ocorrência"]
+        O02["O-02 · Teste fumaça preta<br>Escala de densidade<br>🟡 MANUAL"]
+    end
+
+    subgraph ADM_MTR["📋 ADMINISTRATIVO + MTR"]
+        M01["M-01 · Conferência MTR<br>Volume MTR vs volume caminhão<br>🟡 MANUAL"]
+        D02{"D-02 · Volume MTR =<br>Volume caminhão?"}
+        M01A["Investigar divergência"]
+        M02["M-02 · Baixa no site IMA<br>🟡 MANUAL · 🔴 DEMORADO"]
+        A04["A-04 · Checklist autofill PROCV<br>🟢 AUTOMATIZADO"]
+        M03["M-03 · Impressão + assinatura<br>2 vias<br>🟡 MANUAL"]
+    end
+
+    subgraph FATURAMENTO["💰 FATURAMENTO"]
+        A05["A-05 · Check entrada × medição<br>🟢 FÓRMULAS"]
+        D03{"D-03 · Entrada foi<br>faturada?"}
+        D03A["Registrar observação"]
+        D04{"D-04 · Faturamento<br>tem entrada?"}
+        D04A["Investigar com equipe"]
+        A06["A-06 · Cálculo de tarifa<br>SOMASE + PROCV<br>🟢 FÓRMULAS"]
+        F01["F-01 · Gerar BM<br>🟢 TEMPLATE SEMI-AUTO"]
+        F02["F-02 · Envio BM por e-mail<br>🟡 MANUAL · 🔴 GARGALO"]
+    end
+
+    subgraph NOTA_FISCAL["📑 NOTA FISCAL"]
+        NF01["NF-01 · Copiar dados cols I–AD<br>Faturamento → Lista de Ordem<br>🟡 MANUAL · 🔴 GARGALO"]
+        NF02["NF-02 · Solicitar Lista de Ordem<br>Servelo → Faturamento<br>🟡 MANUAL"]
+        NF03["NF-03 · NFs geradas → envio<br>Enviar para Alessandro<br>🟡 MANUAL"]
+    end
+
+    subgraph FINANCEIRO["🏦 CONTROLE FINANCEIRO"]
+        CF01["CF-01 · Atualizar controle de notas<br>Status: pago / vencido / bloqueado<br>🟡 MANUAL"]
+        F03["F-03 · Emissão boleto Itaú<br>🟡 MANUAL · LGPD"]
+    end
+
+    FINAL(["⬤ FIM — Ciclo encerrado"])
+
+    subgraph EXCECAO["🔀 EXCEÇÕES"]
+        EX01["EX-01 · Domingo sem acesso ao Forms<br>⚠ Perda de rastreabilidade"]
+        EX02["EX-02 · Entrada sem descarte<br>Requer observação"]
+    end
+
+    START --> P01
+    P01 --> P02
+    P02 --> A01
+    A01 --> A02
+    A02 --> R01
+    R01 --> R02
+    R02 --> R03
+    R03 --> R04
+    R04 --> A03
+
+    R03 --> O01
+    O01 --> D01
+    D01 -->|SIM| O01A
+    O01A --> O02
+    D01 -->|NÃO| O02
+
+    R04 --> M01
+    M01 --> D02
+    D02 -->|SIM| M02
+    D02 -->|NÃO| M01A
+    M01A -.->|Retorno| M01
+    M02 --> A04
+    O02 --> A04
+    A04 --> M03
+
+    M03 --> A05
+    A05 --> D03
+    D03 -->|SIM| D04
+    D03 -->|NÃO| D03A
+    D03A -.->|Retorno| A05
+    D04 -->|SIM| A06
+    D04 -->|NÃO| D04A
+    D04A -.->|Retorno| A05
+    A06 --> F01
+    F01 --> F02
+    F02 --> NF01
+    NF01 --> NF02
+    NF02 --> NF03
+    NF03 --> CF01
+    CF01 --> F03
+    F03 --> FINAL
+
+    P02 -.->|Sem acesso| EX01
+    D03 -.->|Sem descarte| EX02

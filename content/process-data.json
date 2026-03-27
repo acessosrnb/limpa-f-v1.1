@@ -1,0 +1,277 @@
+{
+  "process": {
+    "id": "WF-PROC-001",
+    "name": "Processo Limpa Fossa",
+    "organization": "Sanama — GS Inima",
+    "version": "1.1.0",
+    "date": "2026-03-27",
+    "type": "workflow-board",
+    "trigger": "Chegada do caminhão na portaria",
+    "end_condition": "Boleto emitido e ciclo encerrado"
+  },
+
+  "kpis": {
+    "phases": 8,
+    "actors": 7,
+    "decisions": 4,
+    "handoffs": 4,
+    "automation_pct": "~45%",
+    "improvements": 6
+  },
+
+  "actors": [
+    { "id": "porteiro", "label": "Portaria", "scope": "Entrada e registro inicial" },
+    { "id": "automacao", "label": "Automação 24/7", "scope": "Captura e distribuição de dados" },
+    { "id": "recebimento", "label": "Equipe de Recebimento", "scope": "Conferência, formulário, ID real" },
+    { "id": "operacao", "label": "Operação de Campo", "scope": "Inspeção, EPIs, fumaça preta" },
+    { "id": "administrativo", "label": "Administrativo + MTR", "scope": "MTR, checklist, conferência, faturamento" },
+    { "id": "nota_fiscal", "label": "Nota Fiscal", "scope": "Lista de Ordem, emissão NF, envio ao financeiro" },
+    { "id": "financeiro", "label": "Controle Financeiro", "scope": "Acompanhamento de pagamentos, boletos" }
+  ],
+
+  "systems": [
+    { "name": "Microsoft Forms", "role": "Entrada de dados (portaria e recebimento)" },
+    { "name": "Excel Online", "role": "Base de dados, PROCVs, cálculos, checklist" },
+    { "name": "Automação 24/7", "role": "Integração Forms → Excel (inferência: Power Automate)", "note": "Ferramenta não nomeada na transcrição" },
+    { "name": "Site IMA/MTR", "role": "Consulta e baixa de MTR" },
+    { "name": "Servelo", "role": "Abertura de chamados (cadastro, contrato)" },
+    { "name": "Itaú", "role": "Emissão de boletos (manual, restrição LGPD)" }
+  ],
+
+  "main_flow": [
+    {
+      "id": "P-01", "swimlane": "porteiro", "type": "process",
+      "name": "Coleta de dados pelo porteiro",
+      "desc": "ID sequencial, placa, motorista",
+      "mode": "manual", "risk": null
+    },
+    {
+      "id": "P-02", "swimlane": "porteiro", "type": "document",
+      "name": "Formulário de entrada (Forms)",
+      "desc": "Fornecedor + placa + motorista + obs (ID provisório)",
+      "mode": "manual", "risk": "Risco placa"
+    },
+    {
+      "id": "A-01", "swimlane": "automacao", "type": "automation",
+      "name": "Captura resposta do Forms",
+      "desc": "ID resposta, hora, código, cor MTR, tipologia",
+      "mode": "auto", "risk": null
+    },
+    {
+      "id": "A-02", "swimlane": "automacao", "type": "automation",
+      "name": "Adiciona linha na base Excel",
+      "desc": "Base compartilhada com equipe de recebimento. Funciona sem planilha aberta.",
+      "mode": "auto", "risk": "Offset -0,125"
+    },
+    {
+      "id": "R-01", "swimlane": "recebimento", "type": "process",
+      "name": "Visualiza entrada automática",
+      "desc": "Dados caem automaticamente na base",
+      "mode": "handoff", "risk": null
+    },
+    {
+      "id": "R-02", "swimlane": "recebimento", "type": "process",
+      "name": "Associa ID checklist real",
+      "desc": "Substitui ID provisório pelo ID gerado",
+      "mode": "manual", "risk": null
+    },
+    {
+      "id": "R-03", "swimlane": "recebimento", "type": "process",
+      "name": "Confere placa e motorista",
+      "desc": "Validação visual dos dados de entrada",
+      "mode": "manual", "risk": null
+    },
+    {
+      "id": "R-04", "swimlane": "recebimento", "type": "document",
+      "name": "Formulário de recebimento",
+      "desc": "Código do caminhão, qtd MTRs, tipologia",
+      "mode": "manual", "risk": null
+    },
+    {
+      "id": "A-03", "swimlane": "recebimento", "type": "automation",
+      "name": "Automação → tabela de medição",
+      "desc": "PROCV com conversão texto→número para cruzamento",
+      "mode": "auto", "risk": null
+    },
+    {
+      "id": "O-01", "swimlane": "operacao", "type": "process",
+      "name": "Inspeção de EPIs",
+      "desc": "Luva, bota, fardamento, capacete",
+      "mode": "manual", "risk": null
+    },
+    {
+      "id": "D-01", "swimlane": "operacao", "type": "decision",
+      "name": "Caminhão tem vazamento?",
+      "desc": "SIM → Anotar ocorrência · NÃO → Seguir",
+      "mode": "decision", "risk": null
+    },
+    {
+      "id": "O-02", "swimlane": "operacao", "type": "process",
+      "name": "Teste de fumaça preta",
+      "desc": "Escala de densidade via cartão colorimétrico",
+      "mode": "manual", "risk": null
+    },
+    {
+      "id": "M-01", "swimlane": "administrativo", "type": "process",
+      "name": "Conferência do MTR",
+      "desc": "Volume MTR vs volume caminhão",
+      "mode": "manual", "risk": null
+    },
+    {
+      "id": "D-02", "swimlane": "administrativo", "type": "decision",
+      "name": "Volume MTR = Volume caminhão?",
+      "desc": "SIM → Prosseguir · NÃO → Investigar",
+      "mode": "decision", "risk": null
+    },
+    {
+      "id": "M-02", "swimlane": "administrativo", "type": "process",
+      "name": "Baixa no site IMA",
+      "desc": "Busca por destinador → localiza MTR → recebe",
+      "mode": "manual", "risk": "bottleneck"
+    },
+    {
+      "id": "A-04", "swimlane": "administrativo", "type": "automation",
+      "name": "Checklist autofill via PROCV",
+      "desc": "Insere ID → puxa todos os dados automaticamente",
+      "mode": "auto", "risk": null
+    },
+    {
+      "id": "M-03", "swimlane": "administrativo", "type": "document",
+      "name": "Impressão + Assinatura",
+      "desc": "2 vias: empresa + condutor",
+      "mode": "manual", "risk": null
+    },
+    {
+      "id": "A-05", "swimlane": "administrativo", "type": "automation",
+      "name": "Check entrada × medição",
+      "desc": "Formatação condicional: duplicado=vermelho, vazio=amarelo",
+      "mode": "auto", "risk": null
+    },
+    {
+      "id": "D-03", "swimlane": "administrativo", "type": "decision",
+      "name": "Entrada foi faturada?",
+      "desc": "SIM → OK · NÃO → Registrar observação",
+      "mode": "decision", "risk": null
+    },
+    {
+      "id": "D-04", "swimlane": "administrativo", "type": "decision",
+      "name": "Faturamento tem entrada?",
+      "desc": "SIM → OK · NÃO → Investigar com equipe",
+      "mode": "decision", "risk": null
+    },
+    {
+      "id": "A-06", "swimlane": "administrativo", "type": "automation",
+      "name": "Cálculo de tarifa",
+      "desc": "SOMASE aninhado + PROCV por período, cliente e serviço",
+      "mode": "auto", "risk": null
+    },
+    {
+      "id": "F-01", "swimlane": "administrativo", "type": "document",
+      "name": "Boletim de Medição (BM)",
+      "desc": "Template por fornecedor, cálculos automáticos no template",
+      "mode": "manual", "risk": "bottleneck"
+    },
+    {
+      "id": "F-02", "swimlane": "administrativo", "type": "process",
+      "name": "Envio de BM por e-mail",
+      "desc": "Modelo padronizado, enviado individualmente por fornecedor",
+      "mode": "manual", "risk": "bottleneck-main"
+    },
+    {
+      "id": "NF-01", "swimlane": "nota_fiscal", "type": "process",
+      "name": "Copiar dados cols I–AD",
+      "desc": "Cópia manual das informações de faturamento para lançamento de Lista de Ordem",
+      "mode": "manual", "risk": "bottleneck"
+    },
+    {
+      "id": "NF-02", "swimlane": "nota_fiscal", "type": "document",
+      "name": "Solicitar Lista de Ordem (Servelo)",
+      "desc": "Catálogo → Faturamento → Lista de Ordem. Informações fixas: contrato, elemento de custo. Anexa lista.",
+      "mode": "manual", "risk": null
+    },
+    {
+      "id": "NF-03", "swimlane": "nota_fiscal", "type": "process",
+      "name": "NFs geradas → envio a Alessandro",
+      "desc": "Após NFs geradas, envio por e-mail para atualização do controle financeiro",
+      "mode": "manual", "risk": null
+    },
+    {
+      "id": "CF-01", "swimlane": "financeiro", "type": "document",
+      "name": "Atualizar controle de notas",
+      "desc": "Planilha de acompanhamento: tipo movimentação, NF, parcelas, CNPJ, vencimento, status (pago/vencido/bloqueado), juros, receita",
+      "mode": "manual", "risk": null
+    },
+    {
+      "id": "F-03", "swimlane": "administrativo", "type": "process",
+      "name": "Emissão de boleto (Itaú)",
+      "desc": "Processo manual — restrição LGPD/banco",
+      "mode": "manual", "risk": null
+    }
+  ],
+
+  "cadastro_flow": [
+    { "id": "C-01", "name": "Recebe documentos por e-mail", "desc": "CNPJ, insc. estadual, contrato social, ATRP, dados pessoais" },
+    { "id": "C-02", "name": "Confirma dados com fornecedor", "desc": "Valida testemunha se já existente em base" },
+    { "id": "C-03", "name": "Abre chamado no Servelo", "desc": "Catálogo → Faturamento → Novo cadastro de cliente" },
+    { "id": "C-04", "name": "Aguarda código SAP", "desc": "Registra na base Limpa Fossa Total" },
+    { "id": "C-05", "name": "Solicita contrato jurídico", "desc": "Novo contrato (novo) ou Aditivo (existente)" },
+    { "id": "C-06", "name": "Elabora minuta GS", "desc": "Dados cliente + dados Casal + testemunha" },
+    { "id": "C-07", "name": "Cria pasta Gestão Transportadoras", "desc": "Estrutura padrão + subpasta Medição 01" }
+  ],
+
+  "automations": [
+    { "id": "A-01", "name": "Forms entrada → Base Excel", "type": "Automação 24/7", "status": "active", "note": "Sem necessidade de planilha aberta" },
+    { "id": "A-02", "name": "Ajuste de horário -0,125", "type": "Fórmula Excel", "status": "workaround", "note": "Empírico, sem causa raiz" },
+    { "id": "A-03", "name": "Forms recebimento → Tabela medição", "type": "Automação 24/7", "status": "active", "note": "PROCV com VALOR() para conversão" },
+    { "id": "A-04", "name": "Checklist autofill (PROCV)", "type": "Fórmula Excel", "status": "active", "note": "Basta inserir ID, puxa tudo" },
+    { "id": "A-05", "name": "Check entrada × medição", "type": "Fórmula + Format. cond.", "status": "active", "note": "Duplicado=vermelho, vazio=amarelo" },
+    { "id": "A-06", "name": "Cálculo de tarifa (SOMASE)", "type": "Fórmula Excel", "status": "active", "note": "Aninhado por cliente/período/serviço" },
+    { "id": "A-07", "name": "Template BM com cálculos", "type": "Fórmula Excel", "status": "active", "note": "BRR, soma, volume × unitário" },
+    { "id": null, "name": "Geração automática de ID", "type": "—", "status": "missing", "note": "Sequencial manual pelo porteiro" },
+    { "id": null, "name": "Filtro de placas por fornecedor", "type": "—", "status": "missing", "note": "Risco de associação incorreta" },
+    { "id": null, "name": "Envio automático de BM", "type": "—", "status": "missing", "note": "Gargalo principal do faturamento" },
+    { "id": null, "name": "Cópia automática cols I–AD para Lista de Ordem", "type": "—", "status": "missing", "note": "Processo manual repetitivo" },
+    { "id": null, "name": "OCR/IA para leitura de MTR", "type": "—", "status": "proposed", "note": "Power Automate + OCR. Desafios com PDF e qualidade de imagem. QR Code como alternativa." }
+  ],
+
+  "risks": [
+    { "id": "R1", "title": "Troca de placas entre fornecedores", "level": "high", "step": "P-02", "actor": "Porteiro", "desc": "Formulário permite selecionar qualquer placa para qualquer fornecedor. Com dezenas de placas semelhantes, erro é iminente. Impacto: faturamento incorreto, rastreabilidade comprometida." },
+    { "id": "R2", "title": "Indisponibilidade do formulário", "level": "high", "step": "P-02", "actor": "Porteiro / Operação", "desc": "Sem acesso ao Forms (domingo, problema técnico), não se gera ID digital. Operação preenche via impressa. Perda de rastreabilidade e inserção manual posterior." },
+    { "id": "R3", "title": "Offset de horário empírico", "level": "medium", "step": "A-02", "actor": "Automação", "desc": "Fração 0,125 encontrada por tentativa e erro. Sem documentação da causa raiz. Mudança na plataforma pode invalidar a correção." },
+    { "id": "R4", "title": "Erro no lançamento IMA", "level": "medium", "step": "M-02", "actor": "Administrativo", "desc": "Busca manual por destinador no site é demorada e propensa a erros. Volume diário amplifica o risco." }
+  ],
+
+  "improvements": [
+    { "id": "IMP-1", "title": "Geração automática de ID no Forms", "impact": "high", "effort": "S", "resolves": ["P-01", "P-02"], "desc": "Elimina sequencial manual. ID aparece imediatamente para o porteiro. Remove dependência do recebimento. Resolve risco de domingos." },
+    { "id": "IMP-2", "title": "Filtro condicional de placas por fornecedor", "impact": "high", "effort": "S", "resolves": ["P-02"], "desc": "Ao selecionar fornecedor, exibir apenas suas placas vinculadas. Elimina risco de associação incorreta. Base de placas já existe." },
+    { "id": "IMP-3", "title": "Automação de envio de BM por e-mail", "impact": "high", "effort": "M", "resolves": ["F-01", "F-02"], "desc": "Gerar e disparar BM automaticamente para cada fornecedor no fechamento do período. Principal gargalo manual." },
+    { "id": "IMP-4", "title": "Correção de timezone na automação", "impact": "medium", "effort": "XS", "resolves": ["A-02"], "desc": "Investigar causa raiz do offset de 3h. Configurar timezone correto na plataforma em vez de subtração empírica." },
+    { "id": "IMP-5", "title": "Automação da cópia de dados para Lista de Ordem", "impact": "high", "effort": "S", "resolves": ["NF-01"], "desc": "Automatizar extração das colunas I–AD do faturamento para lançamento de Lista de Ordem. Processo atualmente manual e repetitivo." },
+    { "id": "IMP-6", "title": "OCR + extração de dados do MTR", "impact": "high", "effort": "L", "resolves": ["M-02"], "desc": "Digitalizar MTRs no final do dia e usar OCR/IA para extrair número, CNPJ, transportador, placa, volume. QR Code no MTR leva ao IMA com número preenchido — possível via de extração via scraping ou API. Desafios: PDFs não copiáveis, qualidade de cópia variável." }
+  ],
+
+  "exceptions": [
+    { "id": "EX-01", "trigger": "P-02", "title": "Domingo sem acesso ao Forms", "desc": "Via impressa preenchida manualmente. Perda de rastreabilidade digital." },
+    { "id": "EX-02", "trigger": "D-03", "title": "Entrada sem descarte", "desc": "Flat gordura, porta lançada 2x. Requer observação justificando." },
+    { "id": "EX-03", "trigger": "D-04", "title": "Faturamento sem entrada", "desc": "Anomalia. Investigar com equipe de recebimento." }
+  ],
+
+  "technical_notes": [
+    { "topic": "Conversão de tipo", "detail": "ID da resposta do Forms é texto; ID na base de medição é número. PROCV usa VALOR() para converter texto → número inteiro." },
+    { "topic": "Ajuste de horário", "detail": "Automação registra hora com offset de +3h. Subtração de 0,125 (fração de dia = 3h) corrige empiricamente. Causa raiz não documentada." },
+    { "topic": "Fórmulas de faturamento", "detail": "SOMASE aninhado por cliente + período + serviço retorna volume em m³. PROCV de apoio retorna valor unitário. Descontos no unitário antes da multiplicação." },
+    { "topic": "Lista de Ordem", "detail": "Dados copiados manualmente das colunas I a AD do faturamento. Solicitação via Servelo com informações fixas: contrato, elemento de custo. Após 2 dias sem retorno do cliente, o processo segue." },
+    { "topic": "Controle financeiro", "detail": "Planilha gerida por Alessandro. Campos: tipo movimentação, NF, parcela, total parcelas, CNPJ, data lançamento, valor emitido, vencimento, dias bloqueados, data bloqueio, tratativa, data pagamento, valor recebido, juros, receita. Fórmula de status: verifica vencimento e calcula diferença com data de bloqueio." },
+    { "topic": "MTR OCR (proposta)", "detail": "Power Automate estava sendo treinado para ler MTRs digitalizados: número MTR, razão social gerador/transportador, CNPJ, placa, volume (litros/m³/ton). Dificuldade: PDFs são imagens, não texto copiável. QR Code no MTR redireciona ao site IMA com número já preenchido na consulta — possível via alternativa para extração." }
+  ],
+
+  "validation": {
+    "status": "approved_with_caveats",
+    "caveats": [
+      "Causa raiz do offset horário (-0,125) não confirmada"
+    ],
+    "confirmations": [
+      "Ferramenta de automação confirmada como Power Automate na 2ª transcrição"
+    ]
+  }
+}
