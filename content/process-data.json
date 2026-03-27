@@ -3,7 +3,7 @@
     "id": "WF-PROC-001",
     "name": "Processo Limpa Fossa",
     "organization": "Sanama — GS Inima",
-    "version": "1.1.0",
+    "version": "1.1.1",
     "date": "2026-03-27",
     "type": "workflow-board",
     "trigger": "Chegada do caminhão na portaria",
@@ -32,9 +32,9 @@
   "systems": [
     { "name": "Microsoft Forms", "role": "Entrada de dados (portaria e recebimento)" },
     { "name": "Excel Online", "role": "Base de dados, PROCVs, cálculos, checklist" },
-    { "name": "Automação 24/7", "role": "Integração Forms → Excel (inferência: Power Automate)", "note": "Ferramenta não nomeada na transcrição" },
+    { "name": "Power Automate", "role": "Integração Forms → Excel, automações 24/7" },
     { "name": "Site IMA/MTR", "role": "Consulta e baixa de MTR" },
-    { "name": "Servelo", "role": "Abertura de chamados (cadastro, contrato)" },
+    { "name": "Servelo", "role": "Abertura de chamados (cadastro, contrato, lista de ordem)" },
     { "name": "Itaú", "role": "Emissão de boletos (manual, restrição LGPD)" }
   ],
 
@@ -202,7 +202,7 @@
       "mode": "manual", "risk": null
     },
     {
-      "id": "F-03", "swimlane": "administrativo", "type": "process",
+      "id": "F-03", "swimlane": "financeiro", "type": "process",
       "name": "Emissão de boleto (Itaú)",
       "desc": "Processo manual — restrição LGPD/banco",
       "mode": "manual", "risk": null
@@ -227,11 +227,11 @@
     { "id": "A-05", "name": "Check entrada × medição", "type": "Fórmula + Format. cond.", "status": "active", "note": "Duplicado=vermelho, vazio=amarelo" },
     { "id": "A-06", "name": "Cálculo de tarifa (SOMASE)", "type": "Fórmula Excel", "status": "active", "note": "Aninhado por cliente/período/serviço" },
     { "id": "A-07", "name": "Template BM com cálculos", "type": "Fórmula Excel", "status": "active", "note": "BRR, soma, volume × unitário" },
-    { "id": null, "name": "Geração automática de ID", "type": "—", "status": "missing", "note": "Sequencial manual pelo porteiro" },
-    { "id": null, "name": "Filtro de placas por fornecedor", "type": "—", "status": "missing", "note": "Risco de associação incorreta" },
-    { "id": null, "name": "Envio automático de BM", "type": "—", "status": "missing", "note": "Gargalo principal do faturamento" },
-    { "id": null, "name": "Cópia automática cols I–AD para Lista de Ordem", "type": "—", "status": "missing", "note": "Processo manual repetitivo" },
-    { "id": null, "name": "OCR/IA para leitura de MTR", "type": "—", "status": "proposed", "note": "Power Automate + OCR. Desafios com PDF e qualidade de imagem. QR Code como alternativa." }
+    { "id": "IMP-1", "name": "Geração automática de ID", "type": "Forms / Power Automate", "status": "missing", "note": "Sequencial manual pelo porteiro" },
+    { "id": "IMP-2", "name": "Filtro de placas por fornecedor", "type": "Forms / Condicional", "status": "missing", "note": "Risco de associação incorreta" },
+    { "id": "IMP-3", "name": "Envio automático de BM", "type": "Power Automate + Outlook", "status": "missing", "note": "Gargalo principal do faturamento" },
+    { "id": "IMP-5", "name": "Cópia automática cols I–AD → Lista de Ordem", "type": "Power Automate + Excel", "status": "missing", "note": "Processo manual repetitivo (NF-01)" },
+    { "id": "IMP-6", "name": "OCR/IA para leitura de MTR", "type": "Power Automate + OCR", "status": "proposed", "note": "Em experimentação. Desafios com PDFs de imagem e qualidade. QR Code como alternativa." }
   ],
 
   "risks": [

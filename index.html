@@ -467,11 +467,11 @@
       <tr><td>A-05</td><td class="td-name">Check entrada × medição</td><td>Fórmula + Format. cond.</td><td><span class="badge b-auto">● ATIVO</span></td><td>Duplicado=vermelho, vazio=amarelo</td></tr>
       <tr><td>A-06</td><td class="td-name">Cálculo de tarifa (SOMASE)</td><td>Fórmula Excel</td><td><span class="badge b-auto">● ATIVO</span></td><td>Aninhado por cliente/período/serviço</td></tr>
       <tr><td>A-07</td><td class="td-name">Template BM com cálculos</td><td>Fórmula Excel</td><td><span class="badge b-auto">● ATIVO</span></td><td>BRR, soma, volume × unitário</td></tr>
-      <tr><td>—</td><td class="td-name">Geração automática de ID</td><td>—</td><td><span class="badge b-risk">✗ INEXISTENTE</span></td><td>Sequencial manual pelo porteiro</td></tr>
-      <tr><td>—</td><td class="td-name">Filtro de placas por fornecedor</td><td>—</td><td><span class="badge b-risk">✗ INEXISTENTE</span></td><td>Risco de associação incorreta</td></tr>
-      <tr><td>—</td><td class="td-name">Envio automático de BM</td><td>—</td><td><span class="badge b-risk">✗ INEXISTENTE</span></td><td>Gargalo principal do faturamento</td></tr>
-      <tr><td>—</td><td class="td-name">Cópia automática cols I–AD → Lista de Ordem</td><td>—</td><td><span class="badge b-risk">✗ INEXISTENTE</span></td><td>Processo manual repetitivo (NF-01)</td></tr>
-      <tr><td>—</td><td class="td-name">OCR/IA para leitura de MTR</td><td>Power Automate + OCR</td><td><span class="badge b-warning">● PROPOSTA</span></td><td>Em experimentação. Desafios com PDFs de imagem e qualidade. QR Code como alternativa.</td></tr>
+      <tr><td>IMP-1</td><td class="td-name">Geração automática de ID</td><td>Forms / Power Automate</td><td><span class="badge b-risk">✗ INEXISTENTE</span></td><td>Sequencial manual pelo porteiro</td></tr>
+      <tr><td>IMP-2</td><td class="td-name">Filtro de placas por fornecedor</td><td>Forms / Condicional</td><td><span class="badge b-risk">✗ INEXISTENTE</span></td><td>Risco de associação incorreta</td></tr>
+      <tr><td>IMP-3</td><td class="td-name">Envio automático de BM</td><td>Power Automate + Outlook</td><td><span class="badge b-risk">✗ INEXISTENTE</span></td><td>Gargalo principal do faturamento</td></tr>
+      <tr><td>IMP-5</td><td class="td-name">Cópia automática cols I–AD → Lista de Ordem</td><td>Power Automate + Excel</td><td><span class="badge b-risk">✗ INEXISTENTE</span></td><td>Processo manual repetitivo (NF-01)</td></tr>
+      <tr><td>IMP-6</td><td class="td-name">OCR/IA para leitura de MTR</td><td>Power Automate + OCR</td><td><span class="badge b-warning">● PROPOSTA</span></td><td>Em experimentação. Desafios com PDFs de imagem e qualidade. QR Code como alternativa.</td></tr>
     </tbody>
   </table>
 </section>
@@ -623,7 +623,7 @@
 </div><!-- /board -->
 
 <footer class="board-footer">
-  <strong>Sanama — GS Inima</strong> · Workflow Board · Processo Limpa Fossa · WF-PROC-001 · v1.1.0 · 2026
+  <strong>Sanama — GS Inima</strong> · Workflow Board · Processo Limpa Fossa · WF-PROC-001 · v1.1.1 · 2026
 </footer>
 
 <script src="app/js/board.js"></script>
