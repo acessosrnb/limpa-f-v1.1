@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Escopo Técnico — Processo Limpa Fossa | Sanama — GS Inima</title>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --brand-dark:#005C83;--brand-cyan:#31B0C8;--brand-green:#628A1A;
+  --bg:#000;--bg-panel:#0A1118;--bg-card:#0D1920;--border:#142833;
+  --text:#D0DCE4;--text-muted:#7A9AAE;--text-dim:#4A6A7E;
+  --danger:#D94F4F;--warning:#D4A017;
+  --sans:'IBM Plex Sans',system-ui,sans-serif;--mono:'IBM Plex Mono',monospace;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:var(--sans);background:var(--bg);color:var(--text);line-height:1.6;-webkit-font-smoothing:antialiased}
+.page{max-width:960px;margin:0 auto;padding:40px 24px 80px}
+.doc-header{border-bottom:2px solid var(--brand-dark);padding-bottom:24px;margin-bottom:40px;position:relative}
+.doc-header::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--brand-dark),var(--brand-cyan),var(--brand-green))}
+.doc-id{font-family:var(--mono);font-size:10px;letter-spacing:2px;color:var(--brand-cyan);text-transform:uppercase;margin-bottom:6px;padding-top:12px}
+.doc-title{font-size:1.4rem;font-weight:700;color:#fff}
+.doc-title span{color:var(--brand-cyan)}
+.doc-sub{font-size:0.9rem;color:var(--text-muted);margin-top:6px}
+.section{margin-bottom:48px}
+.section-label{font-family:var(--mono);font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--brand-cyan);margin-bottom:8px}
+.section-title{font-size:1.15rem;font-weight:700;color:#fff;margin-bottom:16px}
+table{width:100%;border-collapse:collapse;font-size:13px;margin:16px 0}
+th{text-align:left;font-family:var(--mono);font-size:9px;font-weight:600;text-transform:uppercase;letter-spacing:1.5px;color:var(--text-dim);padding:10px 12px;border-bottom:2px solid var(--border);background:var(--bg-panel)}
+td{padding:10px 12px;border-bottom:1px solid var(--border);color:var(--text-muted);vertical-align:top}
+tr:hover td{background:rgba(49,176,200,0.03)}
+.td-name{color:#fff;font-weight:500}
+.td-right{text-align:right;font-family:var(--mono)}
+.td-center{text-align:center}
+.badge{font-family:var(--mono);font-size:9px;padding:2px 7px;border-radius:3px;font-weight:500;display:inline-block}
+.b-new{background:rgba(49,176,200,0.1);color:var(--brand-cyan)}
+.b-dev{background:rgba(0,92,131,0.15);color:var(--brand-dark)}
+.b-incr{background:rgba(98,138,26,0.1);color:var(--brand-green)}
+.b-audit{background:rgba(212,160,23,0.1);color:var(--warning)}
+.b-arch{background:rgba(151,152,153,0.15);color:var(--text-muted)}
+.summary-strip{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:1px;background:var(--border);border:1px solid var(--border);border-radius:6px;overflow:hidden;margin:24px 0}
+.sum-card{background:var(--bg-panel);padding:16px;text-align:center}
+.sum-val{font-family:var(--mono);font-size:1.5rem;font-weight:700;color:#fff}
+.sum-label{font-size:10px;text-transform:uppercase;letter-spacing:1.5px;color:var(--text-dim);margin-top:2px}
+.sum-val.highlight{color:var(--brand-cyan)}
+.sum-val.green{color:var(--brand-green)}
+.bar-row{display:flex;align-items:center;gap:10px;margin:8px 0}
+.bar-label{font-size:11px;color:var(--text-muted);width:120px;flex-shrink:0}
+.bar-track{flex:1;height:20px;background:var(--border);border-radius:4px;overflow:hidden;display:flex}
+.bar-seg{height:100%;display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:9px;color:#fff;font-weight:500}
+.bar-new{background:var(--brand-cyan)}
+.bar-dev{background:var(--brand-dark)}
+.bar-incr{background:var(--brand-green)}
+.bar-audit{background:var(--warning)}
+.bar-arch{background:var(--text-dim)}
+.bar-value{font-family:var(--mono);font-size:11px;color:var(--text-dim);width:40px;text-align:right;flex-shrink:0}
+.note{background:var(--bg-card);border:1px solid var(--border);border-left:3px solid var(--brand-cyan);border-radius:6px;padding:14px 18px;margin:16px 0;font-size:12px;color:var(--text-muted);line-height:1.6}
+.note strong{color:#fff}
+.doc-footer{margin-top:48px;padding-top:20px;border-top:1px solid var(--border);text-align:center;font-size:11px;color:var(--text-dim)}
+.doc-footer strong{color:var(--brand-cyan)}
+@media(max-width:640px){
+  .page{padding:24px 16px 60px}
+  .summary-strip{grid-template-columns:repeat(2,1fr)}
+  table{font-size:11px}
+  th,td{padding:8px}
+}
+</style>
+</head>
+<body>
+<div class="page">
+
+<header class="doc-header">
+  <div class="doc-id">ESC-PROC-001 · Sanama — GS Inima</div>
+  <div class="doc-title">Escopo Técnico — <span>Processo Limpa Fossa</span></div>
+  <div class="doc-sub">Definição de escopo, fases técnicas e dimensionamento de esforço</div>
+</header>
+
+<!-- ═══ RESUMO ═══ -->
+<div class="section">
+  <div class="section-label">Resumo do Escopo</div>
+  <div class="summary-strip">
+    <div class="sum-card"><div class="sum-val highlight">180h</div><div class="sum-label">Esforço total</div></div>
+    <div class="sum-card"><div class="sum-val">120h</div><div class="sum-label">v1.0 — Base</div></div>
+    <div class="sum-card"><div class="sum-val green">60h</div><div class="sum-label">v1.1 — Evolução</div></div>
+    <div class="sum-card"><div class="sum-val">6</div><div class="sum-label">Fases técnicas</div></div>
+    <div class="sum-card"><div class="sum-val">17</div><div class="sum-label">Artefatos</div></div>
+  </div>
+</div>
+
+<!-- ═══ DETALHAMENTO ═══ -->
+<div class="section">
+  <div class="section-label">Detalhamento</div>
+  <div class="section-title">Escopo por fase técnica</div>
+
+  <table>
+    <thead>
+      <tr><th>#</th><th>Fase</th><th>Tipo</th><th>Camadas impactadas</th><th>Complexidade</th><th style="text-align:right">Esforço</th></tr>
+    </thead>
+    <tbody>
+
+      <tr style="background:rgba(49,176,200,0.04)">
+        <td colspan="5" style="font-family:var(--mono);font-size:10px;letter-spacing:2px;color:var(--brand-cyan);font-weight:600;border-bottom:2px solid var(--border)">VERSÃO 1.0 — ESCOPO BASE</td>
+        <td class="td-right" style="font-weight:700;color:var(--brand-cyan);border-bottom:2px solid var(--border)">120h</td>
+      </tr>
+
+      <tr>
+        <td class="td-center">1</td>
+        <td class="td-name">Análise, diagnóstico e modelagem do processo</td>
+        <td><span class="badge b-new">ANÁLISE</span></td>
+        <td>Documentação, Mermaid</td>
+        <td>Média</td>
+        <td class="td-right">24h</td>
+      </tr>
+      <tr>
+        <td colspan="6" style="padding:4px 12px;font-size:11px;color:var(--text-dim);border-bottom:1px solid var(--border)">
+          Ingestão de transcrição operacional (~2500 palavras), extração semântica, diagnóstico do fluxo atual (AS-IS), mapeamento de atores, sistemas, riscos, automações existentes e oportunidades de melhoria. Modelagem inicial do workflow em Mermaid. Validação de fidelidade à fonte.
+        </td>
+      </tr>
+
+      <tr>
+        <td class="td-center">2</td>
+        <td class="td-name">Desenvolvimento do Workflow Board operacional</td>
+        <td><span class="badge b-dev">DESENVOLVIMENTO</span></td>
+        <td>HTML, CSS, Mermaid</td>
+        <td>Alta</td>
+        <td class="td-right">44h</td>
+      </tr>
+      <tr>
+        <td colspan="6" style="padding:4px 12px;font-size:11px;color:var(--text-dim);border-bottom:1px solid var(--border)">
+          Construção do painel operacional interativo com swimlanes por área, nós tipados (7 tipos), badges semânticos, tabela de automações, matriz de riscos, cards de melhoria priorizados, painéis expansíveis com detalhes técnicos. Design system com paleta institucional Sanama (6 tokens). Diagrama Mermaid com convenções BPM. CSS modular (~400 linhas).
+        </td>
+      </tr>
+
+      <tr>
+        <td class="td-center">3</td>
+        <td class="td-name">Estruturação do repositório e publicação</td>
+        <td><span class="badge b-dev">DESENVOLVIMENTO</span></td>
+        <td>Repositório, Deploy, Docs</td>
+        <td>Média</td>
+        <td class="td-right">22h</td>
+      </tr>
+      <tr>
+        <td colspan="6" style="padding:4px 12px;font-size:11px;color:var(--text-dim);border-bottom:1px solid var(--border)">
+          Repositório com 17 arquivos: página principal, página 404, favicon SVG, .gitignore, robots.txt, sitemap.xml, workflow de deploy via GitHub Actions, README profissional, guia de publicação, documentação de arquitetura. Pacote validado e publicado.
+        </td>
+      </tr>
+
+      <tr>
+        <td class="td-center">4</td>
+        <td class="td-name">Arquitetura modular do projeto</td>
+        <td><span class="badge b-arch">ARQUITETURA</span></td>
+        <td>Estrutura, CSS, HTML, Docs</td>
+        <td>Média-Alta</td>
+        <td class="td-right">30h</td>
+      </tr>
+      <tr>
+        <td colspan="6" style="padding:4px 12px;font-size:11px;color:var(--text-dim);border-bottom:1px solid var(--border)">
+          Organização em 6 camadas com separação de responsabilidades: app/ (CSS modular em 3 arquivos: tokens, layout, componentes), content/ (dados estruturados em JSON), diagrams/ (Mermaid por fluxo), brand/ (assets institucionais), docs/ (guias técnicos), .github/ (deploy). Estrutura projetada para manutenção contínua e escalabilidade.
+        </td>
+      </tr>
+
+      <tr style="background:var(--bg-panel)">
+        <td colspan="4" class="td-name" style="text-align:right">Subtotal v1.0</td>
+        <td></td>
+        <td class="td-right" style="font-weight:700;color:#fff">120h</td>
+      </tr>
+
+      <tr style="background:rgba(98,138,26,0.06)">
+        <td colspan="5" style="font-family:var(--mono);font-size:10px;letter-spacing:2px;color:var(--brand-green);font-weight:600;border-bottom:2px solid var(--border)">VERSÃO 1.1 — EVOLUÇÃO INCREMENTAL</td>
+        <td class="td-right" style="font-weight:700;color:var(--brand-green);border-bottom:2px solid var(--border)">60h</td>
+      </tr>
+
+      <tr>
+        <td class="td-center">5</td>
+        <td class="td-name">Incorporação dos fluxos de NF e Controle Financeiro</td>
+        <td><span class="badge b-incr">EVOLUÇÃO</span></td>
+        <td>HTML, Mermaid, JSON</td>
+        <td>Média</td>
+        <td class="td-right">38h</td>
+      </tr>
+      <tr>
+        <td colspan="6" style="padding:4px 12px;font-size:11px;color:var(--text-dim);border-bottom:1px solid var(--border)">
+          Classificação e integração de novos sub-processos a partir de segunda transcrição: Nota Fiscal, Controle Financeiro, proposta de OCR/MTR. 4 nós novos no fluxo, 2 swimlanes adicionais, 2 painéis expansíveis, 2 automações no inventário, 2 melhorias priorizadas (IMP-5, IMP-6). Diagrama Mermaid estendido. Dados estruturados atualizados.
+        </td>
+      </tr>
+
+      <tr>
+        <td class="td-center">6</td>
+        <td class="td-name">Validação de qualidade e consistência</td>
+        <td><span class="badge b-audit">QUALIDADE</span></td>
+        <td>HTML, JSON</td>
+        <td>Alta (atenção)</td>
+        <td class="td-right">22h</td>
+      </tr>
+      <tr>
+        <td colspan="6" style="padding:4px 12px;font-size:11px;color:var(--text-dim);border-bottom:1px solid var(--border)">
+          Validação cruzada de consistência entre todas as camadas do projeto (interface, dados estruturados, diagramas). Ajuste fino de métricas, classificações e indicadores. Verificação de integridade do pacote para publicação final.
+        </td>
+      </tr>
+
+      <tr style="background:var(--bg-panel)">
+        <td colspan="4" class="td-name" style="text-align:right">Subtotal v1.1</td>
+        <td></td>
+        <td class="td-right" style="font-weight:700;color:#fff">60h</td>
+      </tr>
+
+      <tr style="background:var(--bg-panel);border-top:2px solid var(--brand-cyan)">
+        <td colspan="4" class="td-name" style="text-align:right;font-weight:700;font-size:14px">ESFORÇO TÉCNICO TOTAL</td>
+        <td></td>
+        <td class="td-right" style="font-weight:700;color:var(--brand-cyan);font-size:16px">180h</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- ═══ DISTRIBUIÇÃO ═══ -->
+<div class="section">
+  <div class="section-label">Distribuição</div>
+  <div class="section-title">Distribuição do esforço técnico</div>
+
+  <div class="bar-row">
+    <span class="bar-label">Análise</span>
+    <div class="bar-track"><div class="bar-seg bar-new" style="width:13%">13%</div></div>
+    <span class="bar-value">24h</span>
+  </div>
+  <div class="bar-row">
+    <span class="bar-label">Desenvolvimento</span>
+    <div class="bar-track"><div class="bar-seg bar-dev" style="width:37%">37%</div></div>
+    <span class="bar-value">66h</span>
+  </div>
+  <div class="bar-row">
+    <span class="bar-label">Arquitetura</span>
+    <div class="bar-track"><div class="bar-seg bar-arch" style="width:17%">17%</div></div>
+    <span class="bar-value">30h</span>
+  </div>
+  <div class="bar-row">
+    <span class="bar-label">Evolução</span>
+    <div class="bar-track"><div class="bar-seg bar-incr" style="width:21%">21%</div></div>
+    <span class="bar-value">38h</span>
+  </div>
+  <div class="bar-row">
+    <span class="bar-label">Qualidade</span>
+    <div class="bar-track"><div class="bar-seg bar-audit" style="width:12%">12%</div></div>
+    <span class="bar-value">22h</span>
+  </div>
+</div>
+
+<!-- ═══ POR CAMADA ═══ -->
+<div class="section">
+  <div class="section-label">Por camada técnica</div>
+  <div class="section-title">Esforço por camada de implementação</div>
+
+  <table>
+    <thead><tr><th>Camada</th><th>Fases impactadas</th><th style="text-align:right">Esforço</th><th style="text-align:right">%</th></tr></thead>
+    <tbody>
+      <tr><td class="td-name">HTML / Interface operacional</td><td>1, 2, 4, 5, 6</td><td class="td-right">62h</td><td class="td-right">~34%</td></tr>
+      <tr><td class="td-name">CSS / Design System institucional</td><td>2, 4</td><td class="td-right">28h</td><td class="td-right">~16%</td></tr>
+      <tr><td class="td-name">Mermaid / Modelagem de workflow</td><td>1, 2, 5</td><td class="td-right">20h</td><td class="td-right">~11%</td></tr>
+      <tr><td class="td-name">JSON / Dados estruturados do processo</td><td>4, 5, 6</td><td class="td-right">14h</td><td class="td-right">~8%</td></tr>
+      <tr><td class="td-name">Repositório / Deploy / CI</td><td>3, 4</td><td class="td-right">20h</td><td class="td-right">~11%</td></tr>
+      <tr><td class="td-name">Documentação técnica</td><td>3, 4</td><td class="td-right">14h</td><td class="td-right">~8%</td></tr>
+      <tr><td class="td-name">Análise / Validação de qualidade</td><td>1, 6</td><td class="td-right">22h</td><td class="td-right">~12%</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- ═══ COMPLEXIDADE ═══ -->
+<div class="section">
+  <div class="section-label">Complexidade</div>
+  <div class="section-title">Fatores de complexidade técnica</div>
+
+  <table>
+    <thead><tr><th>Fator</th><th>Impacto no esforço</th><th>Fases afetadas</th></tr></thead>
+    <tbody>
+      <tr><td class="td-name">Workflow board com design system institucional</td><td>Construção completa do painel com componentes customizados e 7 tipos de nós</td><td>#2</td></tr>
+      <tr><td class="td-name">Arquitetura modular em 6 camadas</td><td>Separação de responsabilidades com integridade de referências entre camadas</td><td>#4</td></tr>
+      <tr><td class="td-name">Transcrições operacionais com detalhes técnicos densos</td><td>Análise semântica e extração de regras de negócio (PROCVs, fórmulas, offset horário)</td><td>#1, #5</td></tr>
+      <tr><td class="td-name">Validação cruzada entre 4 camadas técnicas</td><td>Auditoria e correção de consistência entre HTML, JSON, Mermaid e documentação</td><td>#6</td></tr>
+      <tr><td class="td-name">Identidade visual Sanama aplicada</td><td>Design tokens institucionais integrados em todos os componentes</td><td>#2</td></tr>
+      <tr><td class="td-name">Integração incremental sem quebra funcional</td><td>Novos fluxos (NF, Financeiro, OCR) integrados preservando o existente</td><td>#5</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- ═══ PREMISSAS ═══ -->
+<div class="section">
+  <div class="section-label">Premissas</div>
+  <div class="section-title">Premissas técnicas do escopo</div>
+
+  <div class="note">
+    <strong>Perfil técnico:</strong> Profissional sênior com domínio em front-end, modelagem de processos (BPM), GitHub Pages e design de workflows operacionais.<br><br>
+    <strong>Escopo inclui:</strong> Análise de transcrições operacionais, extração de regras de negócio, modelagem de processo, desenvolvimento de interface interativa, codificação HTML/CSS/JS, criação de diagramas Mermaid, estruturação de repositório, documentação técnica, deploy e validação de qualidade.<br><br>
+    <strong>Escopo não inclui:</strong> Reuniões de alinhamento, revisões externas, aprovações, tempo de espera por stakeholders ou implementação em ferramentas de terceiros (Power Automate, Servelo, IMA, sistemas bancários).<br><br>
+    <strong>Versionamento:</strong> v1.0 cobre o escopo base (análise, desenvolvimento, repositório e arquitetura). v1.1 cobre a evolução incremental (novos fluxos de NF e Controle Financeiro) e a validação final de qualidade.
+  </div>
+</div>
+
+<!-- ═══ ARTEFATOS ═══ -->
+<div class="section">
+  <div class="section-label">Artefatos</div>
+  <div class="section-title">Artefatos técnicos produzidos</div>
+
+  <table>
+    <thead><tr><th>Artefato</th><th>Localização</th><th>Função</th><th>Versão</th></tr></thead>
+    <tbody>
+      <tr><td class="td-name">Workflow Board (HTML interativo)</td><td>index.html</td><td>Painel operacional com 8 swimlanes, 30 nós, 12 automações, 6 melhorias</td><td><span class="badge b-incr">v1.1</span></td></tr>
+      <tr><td class="td-name">Diagrama de fluxo principal (Mermaid)</td><td>diagrams/fluxo-principal.mermaid</td><td>Workflow completo com convenções BPM — pronto para Excalidraw</td><td><span class="badge b-incr">v1.1</span></td></tr>
+      <tr><td class="td-name">Diagrama de cadastro (Mermaid)</td><td>diagrams/fluxo-cadastro.mermaid</td><td>Fluxo auxiliar de cadastro de novo cliente</td><td><span class="badge b-new">v1.0</span></td></tr>
+      <tr><td class="td-name">Dados estruturados do processo (JSON)</td><td>content/process-data.json</td><td>Fonte canônica: etapas, atores, automações, riscos, melhorias, notas técnicas</td><td><span class="badge b-incr">v1.1</span></td></tr>
+      <tr><td class="td-name">Design System (CSS modular)</td><td>app/css/ (3 arquivos)</td><td>Tokens de marca Sanama, layout responsivo e componentes de workflow</td><td><span class="badge b-new">v1.0</span></td></tr>
+      <tr><td class="td-name">Documentação de arquitetura</td><td>docs/ARCHITECTURE.md</td><td>Decisões de arquitetura e organização de camadas</td><td><span class="badge b-new">v1.0</span></td></tr>
+      <tr><td class="td-name">Guia de deploy</td><td>docs/DEPLOY.md</td><td>Passo a passo para publicação no GitHub Pages</td><td><span class="badge b-new">v1.0</span></td></tr>
+      <tr><td class="td-name">Deploy automatizado</td><td>.github/workflows/</td><td>GitHub Actions para publicação contínua</td><td><span class="badge b-new">v1.0</span></td></tr>
+    </tbody>
+  </table>
+</div>
+
+<footer class="doc-footer">
+  <strong>Sanama — GS Inima</strong> · Escopo Técnico · Processo Limpa Fossa · ESC-PROC-001 · 27/03/2026
+</footer>
+
+</div>
+</body>
+</html>
