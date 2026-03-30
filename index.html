@@ -3,85 +3,115 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Workflow Board — Processo Limpa Fossa | Sanama — GS Inima</title>
-<meta name="description" content="Painel operacional do processo Limpa Fossa — workflow completo da entrada de caminhões ao faturamento. Sanama — GS Inima.">
+<title>Proposta de Estruturação do Processo | Limpa Fossa | Sanama — GS Inima</title>
+<meta name="description" content="Proposta de estruturação do Processo Limpa Fossa, com workflow operacional, escopo técnico consolidado e visão executiva para aprovação do projeto.">
 <meta name="robots" content="index, follow">
 <meta name="author" content="Sanama — GS Inima">
 
-<!-- Open Graph -->
-<meta property="og:title" content="Workflow Board — Processo Limpa Fossa">
-<meta property="og:description" content="Painel operacional do processo Limpa Fossa — workflow completo da entrada de caminhões ao faturamento.">
+<meta property="og:title" content="Proposta de Estruturação do Processo | Limpa Fossa">
+<meta property="og:description" content="Workflow operacional, escopo técnico consolidado e visão executiva para aprovação do projeto.">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="pt_BR">
 
-<!-- Favicon -->
 <link rel="icon" type="image/svg+xml" href="brand/favicon.svg">
 
-<!-- Fonts -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 
-<!-- Styles: tokens → layout → components -->
 <link rel="stylesheet" href="app/css/brand-tokens.css">
 <link rel="stylesheet" href="app/css/layout.css">
 <link rel="stylesheet" href="app/css/components.css">
+
+<style>
+  .header-sub{
+    color: var(--text-muted);
+    font-size: 13px;
+    margin-top: 6px;
+    max-width: 640px;
+    line-height: 1.5;
+  }
+</style>
 </head>
 <body>
 
-<!-- ═══ BOARD HEADER ═══ -->
 <header class="board-header">
   <div class="header-top">
     <div>
-      <div class="header-id">WF-PROC-001 · Sanama — GS Inima</div>
-      <h1 class="header-title">Processo <span>Limpa Fossa</span> — Workflow Operacional</h1>
+      <div class="header-id">PROP-WF-001 · Sanama — GS Inima</div>
+      <h1 class="header-title">Proposta de <span>Estruturação do Processo</span></h1>
+      <p class="header-sub">
+        Workflow operacional + escopo técnico consolidado + painéis de visualização
+        para apoio à aprovação e início da implementação do projeto.
+      </p>
     </div>
     <div class="header-meta">
-      <div class="meta-chip"><span class="dot dot-info"></span> Gatilho: Chegada do caminhão</div>
-      <div class="meta-chip"><span class="dot dot-auto"></span> 6 automações ativas</div>
-      <div class="meta-chip"><span class="dot dot-risk"></span> 4 riscos mapeados</div>
-      <div class="meta-chip"><span class="dot dot-manual"></span> 4 gargalos manuais</div>
+      <div class="meta-chip"><span class="dot dot-info"></span> Status: Aguardando aprovação</div>
+      <div class="meta-chip"><span class="dot dot-auto"></span> Projeto em backlog</div>
+      <div class="meta-chip"><span class="dot dot-risk"></span> Foco: redução de erro operacional</div>
     </div>
   </div>
+
   <div class="kpi-strip">
+    <div class="kpi"><div class="kpi-val">205h</div><div class="kpi-label">Esforço total</div></div>
     <div class="kpi"><div class="kpi-val">8</div><div class="kpi-label">Fases do fluxo</div></div>
     <div class="kpi"><div class="kpi-val">7</div><div class="kpi-label">Atores</div></div>
-    <div class="kpi"><div class="kpi-val">4</div><div class="kpi-label">Pontos de decisão</div></div>
-    <div class="kpi"><div class="kpi-val">4</div><div class="kpi-label">Handoffs</div></div>
-    <div class="kpi"><div class="kpi-val">~45%</div><div class="kpi-label">Automação</div></div>
-    <div class="kpi"><div class="kpi-val">6</div><div class="kpi-label">Melhorias priorizadas</div></div>
+    <div class="kpi"><div class="kpi-val">~45%</div><div class="kpi-label">Automação atual</div></div>
+    <div class="kpi"><div class="kpi-val">6</div><div class="kpi-label">Melhorias</div></div>
   </div>
 </header>
 
-<!-- ═══ NAV ═══ -->
 <nav class="board-nav" id="board-nav">
   <div class="nav-inner">
+    <a href="#contexto">▸ Contexto</a>
     <a href="#fluxo">▸ Fluxo principal</a>
     <a href="#cadastro-flow">▸ Cadastro</a>
     <a href="#automacoes">▸ Automações</a>
     <a href="#riscos">▸ Riscos</a>
-    <a href="#melhorias">▸ Melhorias TO-BE</a>
+    <a href="#melhorias">▸ Melhorias</a>
     <a href="#validacao">▸ Validação</a>
   </div>
 </nav>
 
-<!-- ═══ MAIN BOARD ═══ -->
 <div class="board">
 
-<!-- ═══ FLUXO PRINCIPAL ═══ -->
-<section class="board-section" id="fluxo">
+<section class="board-section" id="contexto">
   <div class="section-bar">
     <div class="section-icon flow">▶</div>
     <div>
       <div class="section-tag">Seção 01</div>
+      <div class="section-name">Objetivo desta proposta</div>
+    </div>
+  </div>
+
+  <div class="detail-body" style="display:block;">
+    <div class="detail-inner">
+      <p>
+        Esta proposta busca estruturar o Processo Limpa Fossa de forma clara, visual e validável,
+        reduzindo ambiguidade operacional, melhorando a leitura do fluxo ponta a ponta e criando
+        uma base mais segura para a futura implementação.
+      </p>
+
+      <p>
+        O material abaixo consolida as etapas principais do processo, os pontos críticos atuais,
+        as automações existentes, as melhorias priorizadas e a continuidade do fluxo até Nota Fiscal
+        e Controle Financeiro.
+      </p>
+    </div>
+  </div>
+</section>
+
+<section class="board-section" id="fluxo">
+  <div class="section-bar">
+    <div class="section-icon flow">▶</div>
+    <div>
+      <div class="section-tag">Seção 02</div>
       <div class="section-name">Fluxo Principal — Entrada → Controle Financeiro</div>
     </div>
   </div>
 
-  <!-- SWIMLANE BOARD -->
   <div class="swimlane-board">
 
-    <!-- PORTARIA -->
     <div class="swim-label"><div class="swim-label-text">Portaria</div></div>
     <div class="swim-content">
       <div class="node node-start">
@@ -105,7 +135,6 @@
       </div>
     </div>
 
-    <!-- AUTOMAÇÃO -->
     <div class="swim-label"><div class="swim-label-text">Automação<br>24/7</div></div>
     <div class="swim-content">
       <div class="node node-auto">
@@ -123,7 +152,6 @@
       </div>
     </div>
 
-    <!-- RECEBIMENTO -->
     <div class="swim-label"><div class="swim-label-text">Equipe de<br>Recebimento</div></div>
     <div class="swim-content">
       <div class="node node-process">
@@ -162,7 +190,6 @@
       </div>
     </div>
 
-    <!-- OPERAÇÃO -->
     <div class="swim-label"><div class="swim-label-text">Operação<br>de Campo</div></div>
     <div class="swim-content">
       <div class="node node-process">
@@ -187,7 +214,6 @@
       </div>
     </div>
 
-    <!-- ADMINISTRATIVO + MTR -->
     <div class="swim-label"><div class="swim-label-text">Administrativo<br>+ MTR</div></div>
     <div class="swim-content">
       <div class="node node-process">
@@ -226,7 +252,6 @@
       </div>
     </div>
 
-    <!-- FATURAMENTO -->
     <div class="swim-label"><div class="swim-label-text">Faturamento</div></div>
     <div class="swim-content">
       <div class="node node-auto">
@@ -272,7 +297,6 @@
       </div>
     </div>
 
-    <!-- NOTA FISCAL -->
     <div class="swim-label"><div class="swim-label-text">Nota Fiscal</div></div>
     <div class="swim-content">
       <div class="node node-process">
@@ -297,7 +321,6 @@
       </div>
     </div>
 
-    <!-- CONTROLE FINANCEIRO -->
     <div class="swim-label"><div class="swim-label-text">Controle<br>Financeiro</div></div>
     <div class="swim-content">
       <div class="node node-document">
@@ -321,7 +344,6 @@
     </div>
   </div>
 
-  <!-- Expandable: Detalhes técnicos -->
   <button class="detail-toggle" onclick="toggleDetail(this)">
     <span>📐 Detalhe técnico: Lógica de PROCV com conversão de tipo e ajuste de horário</span>
     <span class="chevron">▼</span>
@@ -334,7 +356,6 @@
     </div>
   </div>
 
-  <!-- Expandable: Exceções -->
   <button class="detail-toggle" onclick="toggleDetail(this)">
     <span>🔀 Caminhos de exceção e contingência</span>
     <span class="chevron">▼</span>
@@ -347,38 +368,35 @@
     </div>
   </div>
 
-  <!-- Expandable: Nota Fiscal + Controle Financeiro -->
   <button class="detail-toggle" onclick="toggleDetail(this)">
     <span>📑 Nota Fiscal, Lista de Ordem e Controle Financeiro</span>
     <span class="chevron">▼</span>
   </button>
   <div class="detail-body">
     <div class="detail-inner">
-      <strong>Lista de Ordem:</strong> Após clientes confirmarem (ou após 2 dias sem retorno), copia-se manualmente as colunas I a AD da planilha de faturamento. Solicitação via Servelo: Catálogo → Faturamento → Lista de Ordem. Campos fixos: contrato, elemento de custo. Anexa planilha e informa referência (ex: "Lista de Ordem nº 142").<br><br>
-      <strong>Controle Financeiro:</strong> Planilha gerida por Alessandro. Campos: tipo de movimentação (entrada, parcelamento, adiantamento), número NF, parcela atual / total, CNPJ, data de lançamento, valor emitido, vencimento, dias bloqueados, data de bloqueio, tratativa, data de pagamento, valor recebido, juros, receita/despesas. Fórmula de status: se vencido, calcula diferença entre data de bloqueio e vencimento. Campos de receita/despesas raramente preenchidos na prática.
+      <strong>Lista de Ordem:</strong> Após clientes confirmarem (ou após 2 dias sem retorno), copia-se manualmente as colunas I a AD da planilha de faturamento. Solicitação via Servelo: Catálogo → Faturamento → Lista de Ordem. Campos fixos: contrato, elemento de custo. Anexa planilha e informa referência.<br><br>
+      <strong>Controle Financeiro:</strong> Planilha gerida por Alessandro. Campos: tipo de movimentação, NF, parcelas, CNPJ, datas, vencimento, status, juros e tratativas.
     </div>
   </div>
 
-  <!-- Expandable: MTR OCR proposta -->
   <button class="detail-toggle" onclick="toggleDetail(this)">
-    <span>🤖 Proposta de automação: OCR para leitura de MTR (IMP-6)</span>
+    <span>🤖 Proposta de automação: OCR para leitura de MTR</span>
     <span class="chevron">▼</span>
   </button>
   <div class="detail-body">
     <div class="detail-inner">
-      <strong>Conceito:</strong> Digitalizar todos os MTRs do dia no final do expediente. Automação (Power Automate + OCR/IA) lê os documentos e extrai: número MTR, razão social do gerador, CNPJ, transportador, placa, motorista, código IBAMA, volume (litros/m³/ton).<br><br>
-      <strong>Desafios identificados:</strong> Os MTRs são PDFs de imagem (não copiáveis). A qualidade da cópia varia e causa dificuldade para OCR reconhecer números. O campo de assinatura do motorista é manuscrito, não digitado — difícil de extrair automaticamente.<br><br>
-      <strong>Via alternativa (QR Code):</strong> Cada MTR possui QR Code que redireciona ao site do IMA com o número do MTR já preenchido na tela de consulta. Possível via de extração de dados via scraping ou API do IMA — mas até o momento não há API disponível.
+      <strong>Conceito:</strong> Digitalizar MTRs do dia e usar automação com OCR para extrair dados do documento.<br><br>
+      <strong>Desafios:</strong> PDFs de imagem, qualidade variável da cópia e assinatura manuscrita dificultam leitura automática.<br><br>
+      <strong>Alternativa:</strong> Uso do QR Code do MTR como caminho de consulta ao IMA.
     </div>
   </div>
 </section>
 
-<!-- ═══ FLUXO CADASTRO ═══ -->
 <section class="board-section" id="cadastro-flow">
   <div class="section-bar">
     <div class="section-icon flow">▶</div>
     <div>
-      <div class="section-tag">Seção 02</div>
+      <div class="section-tag">Seção 03</div>
       <div class="section-name">Fluxo Auxiliar — Cadastro de Novo Cliente</div>
     </div>
   </div>
@@ -445,12 +463,11 @@
   </div>
 </section>
 
-<!-- ═══ AUTOMAÇÕES ═══ -->
 <section class="board-section" id="automacoes">
   <div class="section-bar">
     <div class="section-icon auto">⚡</div>
     <div>
-      <div class="section-tag">Seção 03</div>
+      <div class="section-tag">Seção 04</div>
       <div class="section-name">Mapa de Automações</div>
     </div>
   </div>
@@ -476,12 +493,11 @@
   </table>
 </section>
 
-<!-- ═══ RISCOS ═══ -->
 <section class="board-section" id="riscos">
   <div class="section-bar">
     <div class="section-icon risk">⚠</div>
     <div>
-      <div class="section-tag">Seção 04</div>
+      <div class="section-tag">Seção 05</div>
       <div class="section-name">Matriz de Riscos</div>
     </div>
   </div>
@@ -500,7 +516,7 @@
         <div class="risk-title">Indisponibilidade do formulário</div>
         <span class="risk-level rl-high">ALTO</span>
       </div>
-      <div class="risk-desc">Sem acesso ao Forms (domingo, problema técnico), não se gera ID digital. Operação preenche via impressa. Perda de rastreabilidade e inserção manual posterior.</div>
+      <div class="risk-desc">Sem acesso ao Forms, não se gera ID digital. Operação preenche via impressa. Perda de rastreabilidade e inserção manual posterior.</div>
       <div class="risk-step">Etapa: P-02 · Ator: Porteiro / Operação</div>
     </div>
     <div class="risk-card medium">
@@ -522,13 +538,12 @@
   </div>
 </section>
 
-<!-- ═══ MELHORIAS ═══ -->
 <section class="board-section" id="melhorias">
   <div class="section-bar">
     <div class="section-icon improve">↑</div>
     <div>
-      <div class="section-tag">Seção 05</div>
-      <div class="section-name">Melhorias Priorizadas (TO-BE)</div>
+      <div class="section-tag">Seção 06</div>
+      <div class="section-name">Melhorias Priorizadas</div>
     </div>
   </div>
 
@@ -539,7 +554,7 @@
         <span class="badge b-decision">ESFORÇO: S</span>
       </div>
       <div class="improve-title">1. Geração automática de ID no Forms</div>
-      <div class="improve-desc">Elimina sequencial manual. ID aparece imediatamente para o porteiro. Remove dependência do recebimento para associar ID real. Resolve risco de domingos.</div>
+      <div class="improve-desc">Elimina sequencial manual. ID aparece imediatamente para o porteiro. Remove dependência do recebimento para associar ID real.</div>
       <div class="improve-target">Resolve: P-01, P-02</div>
     </div>
     <div class="improve-card">
@@ -548,7 +563,7 @@
         <span class="badge b-decision">ESFORÇO: S</span>
       </div>
       <div class="improve-title">2. Filtro condicional de placas por fornecedor</div>
-      <div class="improve-desc">Ao selecionar fornecedor, exibir apenas suas placas vinculadas. Elimina risco de associação incorreta. Base de placas já existe.</div>
+      <div class="improve-desc">Ao selecionar fornecedor, exibir apenas suas placas vinculadas. Elimina risco de associação incorreta.</div>
       <div class="improve-target">Resolve: P-02</div>
     </div>
     <div class="improve-card">
@@ -557,7 +572,7 @@
         <span class="badge b-warning">ESFORÇO: M</span>
       </div>
       <div class="improve-title">3. Automação de envio de BM por e-mail</div>
-      <div class="improve-desc">Gerar e disparar BM automaticamente para cada fornecedor no fechamento do período. Principal gargalo manual citado na transcrição.</div>
+      <div class="improve-desc">Gerar e disparar BM automaticamente para cada fornecedor no fechamento do período.</div>
       <div class="improve-target">Resolve: F-01, F-02</div>
     </div>
     <div class="improve-card">
@@ -575,7 +590,7 @@
         <span class="badge b-decision">ESFORÇO: S</span>
       </div>
       <div class="improve-title">5. Automação da cópia de dados para Lista de Ordem</div>
-      <div class="improve-desc">Automatizar extração das colunas I–AD do faturamento para lançamento de Lista de Ordem no Servelo. Processo atualmente manual e repetitivo.</div>
+      <div class="improve-desc">Automatizar extração das colunas I–AD do faturamento para lançamento de Lista de Ordem.</div>
       <div class="improve-target">Resolve: NF-01</div>
     </div>
     <div class="improve-card">
@@ -584,18 +599,17 @@
         <span class="badge b-risk">ESFORÇO: L</span>
       </div>
       <div class="improve-title">6. OCR + extração de dados do MTR</div>
-      <div class="improve-desc">Digitalizar MTRs e usar OCR/IA para extrair dados (número, CNPJ, placa, volume). QR Code no MTR leva ao IMA com número preenchido — possível via alternativa. Desafios: PDFs de imagem, qualidade variável.</div>
+      <div class="improve-desc">Digitalizar MTRs e usar OCR/IA para extrair dados. QR Code no MTR é alternativa complementar.</div>
       <div class="improve-target">Resolve: M-02</div>
     </div>
   </div>
 </section>
 
-<!-- ═══ VALIDAÇÃO ═══ -->
 <section class="board-section" id="validacao">
   <div class="section-bar">
     <div class="section-icon flow">✓</div>
     <div>
-      <div class="section-tag">Seção 06</div>
+      <div class="section-tag">Seção 07</div>
       <div class="section-name">Validação do Workflow</div>
     </div>
   </div>
@@ -603,27 +617,46 @@
   <table class="auto-table">
     <thead><tr><th>Check</th><th>Status</th><th>Observação</th></tr></thead>
     <tbody>
-      <tr><td class="td-name">Fidelidade à transcrição</td><td><span class="badge b-auto">✓ OK</span></td><td>Etapas, decisões e detalhes técnicos extraídos de 2 transcrições</td></tr>
-      <tr><td class="td-name">Sequência operacional</td><td><span class="badge b-auto">✓ OK</span></td><td>Fluxo ponta a ponta: Portaria → Faturamento → NF → Controle Financeiro → Boleto</td></tr>
-      <tr><td class="td-name">Decisões posicionadas</td><td><span class="badge b-auto">✓ OK</span></td><td>4 pontos de decisão explícitos (D-01 a D-04)</td></tr>
-      <tr><td class="td-name">Handoffs entre áreas</td><td><span class="badge b-auto">✓ OK</span></td><td>4 handoffs: Portaria→Auto, Auto→Receb., Fatur.→NF, NF→Financeiro</td></tr>
-      <tr><td class="td-name">Cobertura NF + Financeiro</td><td><span class="badge b-auto">✓ OK</span></td><td>Lista de Ordem, envio NF, controle de notas com status de pagamento</td></tr>
-      <tr><td class="td-name">Cobertura MTR OCR</td><td><span class="badge b-auto">✓ OK</span></td><td>Registrada como IMP-6 com desafios e alternativa QR Code documentados</td></tr>
-      <tr><td class="td-name">Automação vs Manual</td><td><span class="badge b-auto">✓ OK</span></td><td>Cada nó classificado. 12 automações mapeadas (6 ativas, 1 workaround, 4 inexistentes, 1 proposta)</td></tr>
-      <tr><td class="td-name">Risco de alucinação</td><td><span class="badge b-warning">△ BAIXO</span></td><td>Power Automate confirmado na 2ª transcrição. Offset 0,125 sem causa raiz documentada.</td></tr>
+      <tr><td class="td-name">Fidelidade à transcrição</td><td><span class="badge b-auto">✓ OK</span></td><td>Etapas, decisões e detalhes técnicos extraídos de 2 transcrições.</td></tr>
+      <tr><td class="td-name">Sequência operacional</td><td><span class="badge b-auto">✓ OK</span></td><td>Fluxo ponta a ponta: Portaria → Faturamento → NF → Controle Financeiro → Boleto.</td></tr>
+      <tr><td class="td-name">Decisões posicionadas</td><td><span class="badge b-auto">✓ OK</span></td><td>4 pontos de decisão explícitos.</td></tr>
+      <tr><td class="td-name">Handoffs entre áreas</td><td><span class="badge b-auto">✓ OK</span></td><td>4 handoffs principais no fluxo.</td></tr>
+      <tr><td class="td-name">Cobertura NF + Financeiro</td><td><span class="badge b-auto">✓ OK</span></td><td>Lista de Ordem, envio NF e controle financeiro incorporados.</td></tr>
+      <tr><td class="td-name">Cobertura MTR OCR</td><td><span class="badge b-auto">✓ OK</span></td><td>Registrada como proposta de evolução futura.</td></tr>
+      <tr><td class="td-name">Automação vs Manual</td><td><span class="badge b-auto">✓ OK</span></td><td>Classificação dos nós e mapa de automações atualizados.</td></tr>
+      <tr><td class="td-name">Ressalva remanescente</td><td><span class="badge b-warning">△ BAIXO</span></td><td>Causa raiz do offset horário (-0,125) ainda não confirmada.</td></tr>
     </tbody>
   </table>
 
   <div class="validation-status">
-    <span class="badge b-auto" style="font-size:12px;padding:8px 20px;border-radius:4px;">APPROVED WITH CAVEATS</span>
-    <p>Ressalva remanescente: causa raiz do offset horário (-0,125) não confirmada.</p>
+    <span class="badge b-auto" style="font-size:12px;padding:8px 20px;border-radius:4px;">PRONTO PARA VALIDAÇÃO DE ESCOPO</span>
+    <p>Este material deve ser utilizado como base para aprovação e início da implementação do projeto.</p>
   </div>
 </section>
 
-</div><!-- /board -->
+<section class="board-section" id="proximo-passo">
+  <div class="section-bar">
+    <div class="section-icon improve">✓</div>
+    <div>
+      <div class="section-tag">Próximo passo</div>
+      <div class="section-name">Validação do escopo</div>
+    </div>
+  </div>
+
+  <div class="detail-body" style="display:block;">
+    <div class="detail-inner">
+      <p>
+        Com a validação deste material e do escopo consolidado de 205 horas, o projeto poderá seguir
+        para a etapa de implementação, utilizando esta estrutura como base de execução.
+      </p>
+    </div>
+  </div>
+</section>
+
+</div>
 
 <footer class="board-footer">
-  <strong>Sanama — GS Inima</strong> · Workflow Board · Processo Limpa Fossa · WF-PROC-001 · v1.1.1 · 2026
+  <strong>Sanama — GS Inima</strong> · Proposta de Estruturação do Processo · Limpa Fossa · PROP-WF-001 · 2026
 </footer>
 
 <script src="app/js/board.js"></script>
